@@ -70,7 +70,33 @@ function setCookie(name, value, days, sameSite = 'Lax') {
 	document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=" + sameSite;
 }
 
+function create_TOC() {
+	const TOC = document.getElementById("TOC");
+	const ol = document.createElement("ol");
+	TOC.appendChild(ol);
+	let current_act = "";
+	let ul = null;
+	document.querySelectorAll(".section").forEach(section => {
+		let act = section.classList[0];
+		if (act != current_act) {
+			const ol_li = document.createElement("li");
+			ol.appendChild(ol_li);
+			ul = document.createElement("ul");
+			ol_li.appendChild(ul);
+			current_act = act;
+		}
+		const ul_li = document.createElement("li");
+		ul.appendChild(ul_li);
+		const a = document.createElement("a");
+		a.href = "#" + section.id;
+		a.innerText = section.innerText;
+		ul_li.appendChild(a);
+	});
+}
+
 window.onload = function() {
+	create_TOC();
+
 	const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 	document.querySelectorAll(".section").forEach(section => {
 		const checkboxStates = JSON.parse(getCookie(section.id) || "{}");
@@ -116,6 +142,8 @@ window.onload = function() {
 
 
 <h2>Table of Contents</h2>
+<div id="TOC"></div>
+<!--
 <ol>
   <li>
     <ul>
@@ -150,7 +178,7 @@ window.onload = function() {
       <li><a href="#Zurkhwood-Skiffs">Zurkhwood Skiffs</a></li>
       <li><a href="#Grymforge">Grymforge</a></li>
       <li><a href="#The-Adamantine-Forge">The Adamantine Forge</a></li>
-      <li><a href="#Mountain-Pass---Lady-Esther">Mountain Pass - Lady Esther</a></li>
+      <li><a href="#Mountain-Pass---Lady-Esther">Mountain Pass (Lady Esther)</a></li>
       <li><a href="#Rosymorn-Monastery">Rosymorn Monastery</a></li>
       <li><a href="#Crèche-Y'llek">Crèche Y'llek</a></li>
       <li><a href="#A'jak'nir-Jeera">A'jak'nir Jeera</a></li>
@@ -167,9 +195,9 @@ window.onload = function() {
       <li><a href="#Mattis">Mattis</a></li>
       <li><a href="#Barcus-Wroot">Barcus Wroot</a></li>
       <li><a href="#Reithwin-Town">Reithwin Town</a></li>
-      <li><a href="#Gale's-Bonuses">Gale's Bonuses</a></li>
       <li><a href="#House-of-Healing-Morgue">House of Healing Morgue</a></li>
       <li><a href="#Moonrise-Towers">Moonrise Towers</a></li>
+      <li><a href="#Gale's-Bonuses">Gale's Bonuses</a></li>
       <li><a href="#Roah-Moonglow">Roah Moonglow</a></li>
       <li><a href="#Lann-Tarv">Lann Tarv</a></li>
       <li><a href="#Araj-Oblodra">Araj Oblodra</a></li>
@@ -222,6 +250,7 @@ window.onload = function() {
     </ul>
   </li>
 </ol>
+-->
 
 
 <table>
@@ -230,20 +259,20 @@ window.onload = function() {
 <tr><td class="center" colspan=4><h1>Act 1</h1><button onclick="clearCheckboxes('Act1')">Clear</button></td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Nautiloid">Nautiloid</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Nautiloid">Nautiloid</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Nautiloid" id="Everburn-Blade"></td><td><img src="imgs/Everburn Blade.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Everburn_Blade">Everburn Blade</a></td><td>Looted from Commander Zhalk at the helm of the Nautiloid during the Prologue or can also be obtained by casting Command (Drop) on Commander Zhalk instead of killing him, though his chance of succeeding the Saving Throw is high.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Dank-Crypt">Dank Crypt</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Dank-Crypt">Dank Crypt</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Dank-Crypt" id="The-Watcher's-Guide"></td><td><img src="imgs/The Watcher's Guide.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Watcher's_Guide">The Watcher's Guide</a></td><td>Found in a trapped sarcophagus with a booby trap where traps will shoot exploding fireballs at you from either side if you do not disable them by pressing the button after opening the sarcophagus.</td></tr>
 <tr><td><input type="checkbox" class="Act1 Dank-Crypt" id="The-Amulet-of-Lost-Voices"></td><td><img src="imgs/The Amulet of Lost Voices.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Amulet_of_Lost_Voices">The Amulet of Lost Voices</a></td><td>Looted from a heavy chest in the same room that Withers emerges.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Druid-Grove">Druid Grove</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Druid-Grove">Druid Grove</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Druid-Grove" id="Shapeshifter's-Boon-Ring"></td><td><img src="imgs/Shapeshifter's Boon Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shapeshifter's_Boon_Ring">Shapeshifter's Boon Ring</a></td><td>Can be looted from the Strange Ox in the Druid Grove, or later at Dammon's blacksmith in the Last Light Inn. (If you kill the Strange Ox, you won't be able to complete the "Help the Devilish Ox" quest.) You can also do this without killing the Ox by getting into a fight with it and fleeing into the kids' cave. Then talk to the Ox again and barter for forgiveness. The ring will be available to purchase.</td></tr>
@@ -268,7 +297,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Druid-Grove" id="Mind-Flayer-Parasite-Specimen-2"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Received from Minthara for completing the quest "Raid the Emerald Grove". (NB: not recommended if you're interested in acquiring loot.)</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Arron">Arron</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Arron">Arron</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Arron" id="Gloves-of-Missile-Snaring"></td><td><img src="imgs/Gloves of Missile Snaring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gloves_of_Missile_Snaring">Gloves of Missile Snaring</a></td><td>336 gp.</td></tr>
@@ -279,20 +308,20 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Arron" id="Hedge-Wanderer-Armour"></td><td><img src="imgs/Hedge Wanderer Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hedge_Wanderer_Armour">Hedge Wanderer Armour</a></td><td>273 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Dammon">Dammon</h2>He is a trader in subsequent Acts as well.
+<tr><td colspan=4><h2 class="Act1 section" id="Dammon">Dammon</h2>He is a trader in subsequent Acts as well.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Dammon" id="Safeguard-Shield"></td><td><img src="imgs/Safeguard Shield.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Safeguard_Shield">Safeguard Shield</a></td><td>115 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act1 Dammon" id="Hunting-Shortbow"></td><td><img src="imgs/Hunting Shortbow.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hunting_Shortbow">Hunting Shortbow</a></td><td>137 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Auntie-Ethel">Auntie Ethel</h2>She will cease being a trader when encountered south of the Blighted Village.
+<tr><td colspan=4><h2 class="Act1 section" id="Auntie-Ethel">Auntie Ethel</h2>She will cease being a trader when encountered south of the Blighted Village.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Auntie-Ethel" id="Corellon's-Grace"></td><td><img src="imgs/Corellon's Grace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Corellon's_Grace">Corellon's Grace</a></td><td>This weapon can be bought (210 gp) or looted from Auntie Ethel in the Riverside Teahouse or the Hollow in the Druid Grove.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Outside-Druid-Grove">Outside Druid Grove</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Outside-Druid-Grove">Outside Druid Grove</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Outside-Druid-Grove" id="Gloves-of-Power"></td><td><img src="imgs/Gloves of Power.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gloves_of_Power">Gloves of Power</a></td><td>Looted from the Goblin Boss Za'Krug in front of the Druid Grove.</td></tr>
@@ -303,7 +332,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Outside-Druid-Grove" id="Scratch"></td><td><img src="imgs/Scratch.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Scratch">Scratch</a></td><td>Leave Scratch with your scent so he joins your camp, then later when he offers you a ball, throw it to play fetch with him.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Owlbear-Nest">Owlbear Nest</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Owlbear-Nest">Owlbear Nest</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Owlbear-Nest" id="The-Oak-Father's-Embrace"></td><td><img src="imgs/The Oak Father's Embrace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Oak_Father's_Embrace">The Oak Father's Embrace</a></td><td>Lootable from a headless skeleton, on Owlbear Nest.</td></tr>
@@ -311,7 +340,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Owlbear-Nest" id="Vision-of-the-Absolute"></td><td><img src="imgs/Vision of the Absolute.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vision_of_the_Absolute">Vision of the Absolute</a></td><td>Repaired by finding and combining the Shaft of a Broken Spear and the Head of a Broken Spear (by right-clicking on one of the items in your inventory and pressing 'combine', then dragging the other item into the open slot.) Shaft of a Broken Spear: Found on the body of Edowin in the forest west of the Druid Grove <b>(X: 136, Y: 446)</b>, and Head of a Broken Spear: Looted from the Owlbear in the Owlbear Nest.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Sunlit-Wetlands">Sunlit Wetlands</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Sunlit-Wetlands">Sunlit Wetlands</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Sunlit-Wetlands" id="The-Sparkle-Hands"></td><td><img src="imgs/The Sparkle Hands.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Sparkle_Hands">The Sparkle Hands</a></td><td>On the island across the river, where a group of Mud Mephits are located near a tree, you'll find a chest positioned with its back facing the mainland. <b>(X:95, Y:210).</b></td></tr>
@@ -325,7 +354,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Sunlit-Wetlands" id="Mayrina's-Locket"></td><td><img src="imgs/Mayrina's Locket.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mayrina's_Locket">Mayrina's Locket</a></td><td>Mayrina's Locket can be obtained by either looting it from her corpse or persuading her to give it to you after learning Auntie Ethel's intentions through Speak with Dead. Mayrina will need to survive into Act 3 to get other items.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Blighted-Village">Blighted Village</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Blighted-Village">Blighted Village</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Blighted-Village" id="Warped-Headband-of-Intellect"></td><td><img src="imgs/Warped Headband of Intellect.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Warped_Headband_of_Intellect">Warped Headband of Intellect</a></td><td>Dropped by Lump the Enlightened in the Blighted Village <b>(X:13, Y:366)</b>.</td></tr>
@@ -341,7 +370,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Blighted-Village" id="Infernal-Iron-1"></td><td><img src="imgs/Infernal Iron.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Iron">Infernal Iron</a></td><td>Inside a chest in the basement of a house <b>(X: -434 Y: -370)</b>.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Whispering-Depths">Whispering Depths</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Whispering-Depths">Whispering Depths</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Whispering-Depths" id="Spiderstep-Boots"></td><td><img src="imgs/Spiderstep Boots.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Spiderstep_Boots">Spiderstep Boots</a></td><td>Found in a heavy chest in the Arachnomancer's lab within the Whispering Depths <b>(X: -514 Y: -411)</b>.</td></tr>
@@ -349,7 +378,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Whispering-Depths" id="Poisoner's-Robe"></td><td><img src="imgs/Poisoner's Robe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Poisoner's_Robe">Poisoner's Robe</a></td><td>This robe is dropped by the Phase Spider Matriarch.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Goblin-Camp">Goblin Camp</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Goblin-Camp">Goblin Camp</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Goblin-Camp" id="Crusher's-Ring"></td><td><img src="imgs/Crusher's Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Crusher's_Ring">Crusher's Ring</a></td><td>Worn by Crusher in the Goblin Camp. You can slip the ring off his toe when he demands you kiss his feet, or kill Crusher to take it off his body.</td></tr>
@@ -359,7 +388,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Goblin-Camp" id="Volo's-Ersatz-Eye"></td><td><img src="imgs/Volo's Ersatz Eye.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Volo's_Ersatz_Eye_(Condition)">Volo's Ersatz Eye</a></td><td>Rescue Volo from the Goblin Camp. When speaking to him in the Campsite afterwards, tell him about your Tadpole infection and agree to his experimental surgery.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Grat-the-Trader">Grat the Trader</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Grat-the-Trader">Grat the Trader</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Grat-the-Trader" id="Doom-Hammer"></td><td><img src="imgs/Doom Hammer.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Doom_Hammer">Doom Hammer</a></td><td>137 gp.</td></tr>
@@ -369,7 +398,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Grat-the-Trader" id="Swiresy-Shoes"></td><td><img src="imgs/Swiresy Shoes.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Swiresy_Shoes">Swiresy Shoes</a></td><td>74 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Roah-Moonglow">Roah Moonglow</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Roah-Moonglow">Roah Moonglow</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Roah-Moonglow" id="Blooded-Greataxe"></td><td><img src="imgs/Blooded Greataxe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blooded_Greataxe">Blooded Greataxe</a></td><td>798 gp.</td></tr>
@@ -379,7 +408,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Roah-Moonglow" id="Hunter's-Dagger"></td><td><img src="imgs/Hunter's Dagger.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hunter's_Dagger">Hunter's Dagger</a></td><td>137 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Shattered-Sanctum">Shattered Sanctum</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Shattered-Sanctum">Shattered Sanctum</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Shattered-Sanctum" id="Brand-of-the-Absolute"></td><td><img src="imgs/Brand of the Absolute.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Brand_of_the_Absolute">Brand of the Absolute</a></td><td>Agree to let any or all characters be branded by Gut in the Goblin Camp.</td></tr>
@@ -407,7 +436,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Shattered-Sanctum" id="Ring-of-Poison-Resistance"></td><td><img src="imgs/Ring of Poison Resistance.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Poison_Resista">Ring of Poison Resistance</a></td><td>Found on a skeleton inside a sarcophagus just before the Worg Pens area of the Shattered Sanctum <b>(X:338, Y:14)</b>.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Worg-Pens">Worg Pens</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Worg-Pens">Worg Pens</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Worg-Pens" id="Worgfang"></td><td><img src="imgs/Worgfang.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Worgfang">Worgfang</a></td><td>Worgfang can be looted from a pile of bones in one of the cells within the Worg Pens area of the Goblin Camp <b>(X: 386 Y: -17)</b>.</td></tr>
@@ -415,7 +444,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Worg-Pens" id="Linebreaker-Boots"></td><td><img src="imgs/Linebreaker Boots.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Linebreaker_Boots">Linebreaker Boots</a></td><td>Dropped by Beastmaster Zurk in the Worg Pens.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Waukeen's-Rest">Waukeen's Rest</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Waukeen's-Rest">Waukeen's Rest</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Waukeen's-Rest" id="Svartlebee's-Woundseeker"></td><td><img src="imgs/Svartlebee's Woundseeker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Svartlebee's_Woundseeker">Svartlebee's Woundseeker</a></td><td>Carried by Gauntlet Yeva.</td></tr>
@@ -423,7 +452,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Waukeen's-Rest" id="Counsellor-Florrick-Reward"></td><td><img src="imgs/Counsellor Florrick's Reward.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Rescue_the_Grand_Duke">Counsellor Florrick's Reward</a></td><td>Reward for rescuing Counsellor Florrick from the burning inn of Waukeen's Rest during the quest "Rescue the Grand Duke", where Counsellor Florrick offers the party a choice between three items with the shared ability names: <a href="https://bg3.wiki/wiki/The_Sparky_Points">The Sparky Points</a>, <a href="https://bg3.wiki/wiki/The_Joltshooter">The Joltshooter</a>, and <a href="https://bg3.wiki/wiki/The_Spellsparkler">The Spellsparkler</a> (recommended).</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Zhentarim-Hideout">Zhentarim Hideout</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Zhentarim-Hideout">Zhentarim Hideout</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Zhentarim-Hideout" id="Harold"></td><td><img src="imgs/Harold.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Harold">Harold</a></td><td>Reward for bringing the unopened chest to Zarys in the Zhentarim Hideout as part of Find the Missing Shipment.</td></tr>
@@ -431,7 +460,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Zhentarim-Hideout" id="Infernal-Iron-3"></td><td><img src="imgs/Infernal Iron.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Iron">Infernal Iron</a></td><td>Inside a trapped chest, in a locked room in the Zhentarim Basement <b>(X: 285 Y: -165)</b>.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Brem">Brem</h2>Brem's secret stock is unlocked after completing "Find the Missing Shipment".
+<tr><td colspan=4><h2 class="Act1 section" id="Brem">Brem</h2>Brem's secret stock is unlocked after completing "Find the Missing Shipment".</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Brem" id="The-Jolty-Vest"></td><td><img src="imgs/The Jolty Vest.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Jolty_Vest">The Jolty Vest</a></td><td>510 gp.</td></tr>
@@ -442,7 +471,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Brem" id="Gloves-of-Hail-of-Thorns"></td><td><img src="imgs/Gloves of Hail of Thorns.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gloves_of_Hail_of_Thorns">Gloves of Hail of Thorns</a></td><td>180 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Githyanki-Patrol">Githyanki Patrol</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Githyanki-Patrol">Githyanki Patrol</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Githyanki-Patrol" id="Githyanki-Crossbow"></td><td><img src="imgs/Githyanki Crossbow.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Githyanki_Crossbow">Githyanki Crossbow</a></td><td>Dropped by Raider Chost and Raider Zastri of the Githyanki Patrol in the Mountain Pass area of The Risen Road <b>(X:-137, Y:558)</b>.</td></tr>
@@ -451,7 +480,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Githyanki-Patrol" id="Silver-Sword-of-the-Astral-Plane"></td><td><img src="imgs/Silver Sword of the Astral Plane.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Silver_Sword_of_the_Astral_Plane">Silver Sword of the Astral Plane</a></td><td>Can be obtained by casting Command (Drop) or Disarming Attack (Ranged) or Disarming Attack (Melee) on Kith'rak Voss during the Gith patrol scene before he flies away, though his chance of succeeding the Saving Throw is very high, or as a reward for showing the Orphic Hammer to or killing Kith'rak Voss in Chapter Three.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Risen-Road">Risen Road</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Risen-Road">Risen Road</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Risen-Road" id="Infernal-Robe"></td><td><img src="imgs/Infernal Robe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Robe">Infernal Robe</a></td><td>Recruit Wyll and kill Karlach. Mizora will reward Wyll with these when taking a Long Rest. (Wyll must be in your party.)</td></tr>
@@ -464,7 +493,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Risen-Road" id="Smuggler's-Ring"></td><td><img src="imgs/Smuggler's Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Smuggler's_Ring">Smuggler's Ring</a></td><td>Looted from a Skeleton, hidden in a bush on the lower path following the river, near the broken bridge section at The Risen Road <b>(X:57, Y:514)</b>.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Underdark">Underdark</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Underdark">Underdark</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Underdark" id="Helmet-of-Smiting"></td><td><img src="imgs/Helmet of Smiting.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Helmet_of_Smiting">Helmet of Smiting</a></td><td>This helmet can be found inside a locked gilded chest in the Selûnite Outpost <b>(X:163, Y:-248)</b>.</td></tr>
@@ -481,7 +510,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Underdark" id="Dog-Collar"></td><td><img src="imgs/Dog Collar.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Dog_Collar">Dog Collar</a></td><td>Found in a grave on the cliff overlooking Arcane Tower to the south of the Underdark - Sussur Tree Waypoint (On the 4th floor of the Arcane Tower, there's a button in the North-Eastern corner. When pressed, it seems inactive. However, if you wear the Dog Collar and interact with it, you'll discover it's actually a food dispenser for Lenore's pet, as it dispenses a piece of raw steak).</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Myconoid-Colony">Myconoid Colony</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Myconoid-Colony">Myconoid Colony</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Myconoid-Colony" id="Boots-of-Speed"></td><td><img src="imgs/Boots of Speed.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Boots_of_Speed">Boots of Speed</a></td><td>Worn by Thulla in the Myconid Colony. She gives them to you as thanks for curing her of the duergar poison in "Cure the Poisoned Gnome".</td></tr>
@@ -492,7 +521,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Myconoid-Colony" id="Champion's-Chain"></td><td><img src="imgs/Champion's Chain.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Champion's_Chain">Champion's Chain</a></td><td>Reward for delivering Nere's Head to Glut during the quest "Deliver Nere's Head".</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Blurg">Blurg</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Blurg">Blurg</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Blurg" id="The-Baneful"></td><td><img src="imgs/The Baneful.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Baneful">The Baneful</a></td><td>380 gp.</td></tr>
@@ -505,18 +534,18 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Blurg" id="Melf's-First-Staff"></td><td><img src="imgs/Melf's First Staff.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Melf's_First_Staff">Melf's First Staff</a></td><td>200 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Omeluum">Omeluum</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Omeluum">Omeluum</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act1 Omeluum" id="Ring-of-Mind-Shielding"></td><td><img src="imgs/Ring of Mind-Shielding.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Mind-Shielding">Ring of Mind-Shielding</a></td><td>Offered by Omeluum at the end of "Help Omeluum Investigate the Parasite". You can purchase it either with gold, or by trading a story or information about the Nautiloid (70 gp).</td></tr>
 <tr><td><input type="checkbox" class="Act1 Omeluum" id="Creation's-Echo"></td><td><img src="imgs/Creation's Echo.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Creation's_Echo">Creation's Echo</a></td><td>620 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act1 Omeluum" id="Pearl-of-Power-Amulet"></td><td><img src="imgs/Pearl of Power Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/https://bg3.wiki/wiki/Pearl_of_Power_Amulet">Pearl of Power Amulet</a></td><td>90 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act1 Omeluum" id="Boots-of-Stormy-Clamour"></td><td><img src="imgs/Boots of Stormy Clamour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Boots_of_Stormy_Clamour">Boots of Stormy Clamour</a></td><td>140 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act1 Omeluum" id="Ring-of-Salving"></td><td><img src="imgs/Ring of Salving.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Salving">Ring of Salving</a></td><td>80 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act1 Omeluum" id="The-Shadespell-Circlet"></td><td><img src="imgs/The Shadespell Circlet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Shadespell_Circlet">The Shadespell Circlet</a></td><td>180 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act1 Omeluum" id="Ring-of-Mind-Shielding"></td><td><img src="imgs/Ring of Mind-Shielding.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Mind-Shielding">Ring of Mind-Shielding</a></td><td>Offered by Omeluum at the end of "Help Omeluum Investigate the Parasite". You can purchase it either with gold, or by trading a story or information about the Nautiloid (70 gp).</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Derryth-Bonecloak">Derryth Bonecloak</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Derryth-Bonecloak">Derryth Bonecloak</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Derryth-Bonecloak" id="Amulet-of-Restoration"></td><td><img src="imgs/Amulet of Restoration.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_Restoration">Amulet of Restoration</a></td><td>320 gp.</td></tr>
@@ -528,7 +557,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Derryth-Bonecloak" id="Gloves-of-Uninhibited-Kushigo"></td><td><img src="imgs/Gloves of Uninhibited Kushigo.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gloves_of_Uninhibited_Kushigo">Gloves of Uninhibited Kushigo</a></td><td>Given to you by Derryth Bonecloak in the Myconid Colony as reward for saving Baelen Bonecloak during "Find the Mushroom Picker".</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="The-Festering-Cove">The Festering Cove</h2>The entrance to The Festering Cove can be found in the Torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock <b>(X: 76 Y: -242)</b> that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove.
+<tr><td colspan=4><h2 class="Act1 section" id="The-Festering-Cove">The Festering Cove</h2>The entrance to The Festering Cove can be found in the Torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock <b>(X: 76 Y: -242)</b> that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 The-Festering-Cove" id="Drow-Studded-Leather-Armour"></td><td><img src="imgs/Drow Studded Leather Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Drow_Studded_Leather_Armour">Drow Studded Leather Armour</a></td><td>Inside a Heavy Chest at Lolth's Cultist's cache <b>(X:71 Y:-220)</b>, climbing up a high spot near the entrance of The Festering Cove.</td></tr>
@@ -538,7 +567,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 The-Festering-Cove" id="BOOOAL's-Blessing"></td><td><img src="imgs/BOOOAL's Blessing.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/BOOOAL's_Blessing_(Condition)">BOOOAL's Blessing</a></td><td>Sacrifice a companion to BOOOAL in The Festering Cove.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Arcane-Tower">Arcane Tower</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Arcane-Tower">Arcane Tower</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Arcane-Tower" id="Skybreaker"></td><td><img src="imgs/Skybreaker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Skybreaker">Skybreaker</a></td><td>In a locked chest in front of the Arcane Tower in the Underdark <b>(X:27, Y:-298)</b>.</td></tr>
@@ -552,7 +581,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Arcane-Tower" id="The-Sparkswall"></td><td><img src="imgs/The Sparkswall.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Sparkswall">The Sparkswall</a></td><td>This ring can be found in a gilded chest in the Arcane Tower's basement. Guiding Light is required to access the basement.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Zurkhwood-Skiffs">Zurkhwood Skiffs</h2>Primary entry to Grymforge is through the Decrepit Village by taking the skiff on the beach docks.
+<tr><td colspan=4><h2 class="Act1 section" id="Zurkhwood-Skiffs">Zurkhwood Skiffs</h2>Primary entry to Grymforge is through the Decrepit Village by taking the skiff on the beach docks.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Zurkhwood-Skiffs" id="Shining-Staver-of-Skulls"></td><td><img src="imgs/Shining Staver-of-Skulls.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shining_Staver-of-Skulls">Shining Staver-of-Skulls</a></td><td>Can be looted from or sold by Corsair Greymon, a duergar on the Ebon Lake boat to Grymforge. Greymon can be found in the main chamber, if not killed on the boat.</td></tr>
@@ -561,7 +590,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Zurkhwood-Skiffs" id="Intransigent-Warhammer"></td><td><img src="imgs/Intransigent Warhammer.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Intransigent_Warhammer">Intransigent Warhammer</a></td><td>Can be found inside a Watertight Chest.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Grymforge">Grymforge</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Grymforge">Grymforge</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Grymforge" id="Infernal-Alloy"></td><td><img src="imgs/Infernal Alloy.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Alloy">Infernal Alloy</a></td><td>Can be acquired from Stonemason Kith by passing three checks (History, Investigation, and Perception) during conversation. If these checks fail, the alloy can also be obtained by killing or purchasing it from Kith.</td></tr>
@@ -589,7 +618,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Grymforge" id="Sentient-Amulet"></td><td><img src="imgs/Sentient Amulet (Very Rare).png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sentient_Amulet_(Very_Rare)">Sentient Amulet (Very Rare)</a></td><td>Upgraded from the (Rare) variant upon completing the Help the Cursed Monk quest (if the player refuses to take on the monk's madness and fights him).</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="The-Adamantine-Forge">The Adamantine Forge</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="The-Adamantine-Forge">The Adamantine Forge</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 The-Adamantine-Forge" id="Mithral-Ore"></td><td><img src="imgs/Mithral Ore.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mithral_Ore">Mithral Ore</a></td><td>Mithral Ore is an ingredient found from one of two Ore Veins in Abandoned Refuge. The first is located northeast of the Adamantine Forge, across some lava, against the cavern wall at <b>(X: -556, Y: 277)</b>. The second can be found northwest of Abandoned Refuge, also across some lava, next to a cliff at <b>(X: -642, Y: 253)</b>.</td></tr>
@@ -603,7 +632,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 The-Adamantine-Forge" id="Adamantine-Gear"></td><td><img src="imgs/Adamantine Gear.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Adamantine_Forge">Adamantine Gear</a></td><td>There is enough Mithral Ore to craft two Adamantine items. The Adamantine Splint Armour and Shield are recommended.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Mountain-Pass---Lady-Esther">Mountain Pass - Lady Esther</h2>If you complete her quest regarding obtaining a Githyanki egg, you will no longer be able to trade with her.
+<tr><td colspan=4><h2 class="Act1 section" id="Mountain-Pass---Lady-Esther">Mountain Pass (Lady Esther)</h2>If you complete her quest regarding obtaining a Githyanki egg, you will no longer be able to trade with her.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Mountain-Pass---Lady-Esther" id="Periapt-of-Wound-Closure"></td><td><img src="imgs/Periapt of Wound Closure.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Periapt_of_Wound_Closure">Periapt of Wound Closure</a></td><td>250 gp.</td></tr>
@@ -616,7 +645,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Mountain-Pass---Lady-Esther" id="Hoppy"></td><td><img src="imgs/Hoppy.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hoppy">Hoppy</a></td><td>200 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Rosymorn-Monastery">Rosymorn Monastery</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Rosymorn-Monastery">Rosymorn Monastery</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Rosymorn-Monastery" id="Holy-Lance-Helm"></td><td><img src="imgs/Holy Lance Helm.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Holy_Lance_Helm">Holy Lance Helm</a></td><td>Found in a chest in Rosymorn Monastery <b>(X: 120 Y: 35)</b>.</td></tr>
@@ -626,7 +655,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Rosymorn-Monastery" id="Ceremonial-Mace"></td><td><img src="imgs/Ceremonial Mace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ceremonial_Mace">Ceremonial Mace</a></td><td>Found on a random kobold in the Rosymorn Monastery Firewine storage room, this Ceremonial Mace should be placed onto the Southeast altar for Dawnmaster Stockhold.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Crèche-Y'llek">Crèche Y'llek</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="Crèche-Y'llek">Crèche Y'llek</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 Crèche-Y'llek" id="Mind-Flayer-Parasite-Specimen-10"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Three are found in the Infirmary of Crèche Y'llek, next to the Zaith'isk.</td></tr>
@@ -648,7 +677,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 Crèche-Y'llek" id="The-Blood-of-Lathander"></td><td><img src="imgs/The Blood of Lathander.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Blood_of_Lathander">The Blood of Lathander</a></td><td>In the western hallway at <b>(X:1330, Y:-660)</b>, there are two statues that need to be rotated: the one to the south requires an Athletics check (or a grease bottle) to move and should be turned west, while the other should be turned east. Proceed through the opening, evading traps along the way, until you reach the Blood of Lathander. If the Dawnmaster's Crest has been obtained, simply place it in the altar's item slot to safely acquire the Blood of Lathander. Otherwise, taking the mace will trigger a countdown to the Monastery's destruction. The party has only four turns to either escape the Monastery or dismantle the four Lathander Solar Machines that activate the trap.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="A'jak'nir-Jeera">A'jak'nir Jeera</h2>She is a Githyanki quartermistress and can be found in the Crèche Y'llek and is willing to trade.
+<tr><td colspan=4><h2 class="Act1 section" id="A'jak'nir-Jeera">A'jak'nir Jeera</h2>She is a Githyanki quartermistress and can be found in the Crèche Y'llek and is willing to trade.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 A'jak'nir-Jeera" id="Gloves-of-Dexterity"></td><td><img src="imgs/Gloves of Dexterity.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gloves_of_Dexterity">Gloves of Dexterity</a></td><td>600 gp.</td></tr>
@@ -662,7 +691,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act1 A'jak'nir-Jeera" id="Amulet-of-Branding"></td><td><img src="imgs/Amulet of Branding.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_Branding">Amulet of Branding</a></td><td>Can be looted from A'jak'nir Jeera <b>(X: 1383 Y: -812)</b> in Crèche Y'llek.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="At-Camp-After-Lich-Queen-Encounter">At Camp After Lich Queen Encounter</h2></td></tr>
+<tr><td colspan=4><h2 class="Act1 section" id="At-Camp-After-Lich-Queen-Encounter">At Camp After Lich Queen Encounter</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act1 At-Camp-After-Lich-Queen-Encounter" id="Voss'-Silver-Sword"></td><td><img src="imgs/Voss' Silver Sword.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Voss'_Silver_Sword">Voss' Silver Sword</a></td><td>Carried by Kith'rak Voss, can be confronted late into Act 1 or during Act 2. Can be purchased from Voss when engaging in conversation with him in Act 3.</td></tr>
@@ -672,7 +701,7 @@ window.onload = function() {
 <tr><td class="center" colspan=4><h1>Act 2</h1><button onclick="clearCheckboxes('Act2')">Clear</button></td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Ruined-Battlefield">Ruined Battlefield</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Ruined-Battlefield">Ruined Battlefield</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Ruined-Battlefield" id="Moonlantern"></td><td><img src="imgs/Moonlantern.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Moonlantern">Moonlantern</a></td><td>One can be found in Balthazar's room in Moonrise Towers, while another can be looted from Kar'niss in the Ruined Battlefield.</td></tr>
@@ -692,7 +721,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Ruined-Battlefield" id="Raven-Gloves"></td><td><img src="imgs/Raven Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Raven_Gloves">Raven Gloves</a></td><td>Given by He Who Was for completing "Punish the Wicked".</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Last-Light-Inn">Last Light Inn</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Last-Light-Inn">Last Light Inn</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Last-Light-Inn" id="Hat-of-Fire-Acuity"></td><td><img src="imgs/Hat of Fire Acuity.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hat_of_Fire_Acuity">Hat of Fire Acuity</a></td><td>Only obtainable by defeating the Strange Ox at the Last Light Inn or Rivington; if defeated at the Druid Grove, it won't drop the item.</td></tr>
@@ -710,7 +739,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Last-Light-Inn" id="Sylvan-Scimitar"></td><td><img src="imgs/Sylvan Scimitar.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sylvan_Scimitar">Sylvan Scimitar</a></td><td>This weapon is held by Jaheira. It can be obtained by killing and looting her, or recruiting her.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Quartermaster-Talli">Quartermaster Talli</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Quartermaster-Talli">Quartermaster Talli</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Quartermaster-Talli" id="Shield-of-Devotion"></td><td><img src="imgs/Shield of Devotion.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shield_of_Devotion">Shield of Devotion</a></td><td>1140 gp.</td></tr>
@@ -728,7 +757,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Quartermaster-Talli" id="Cloak-of-Protection"></td><td><img src="imgs/Cloak of Protection.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloak_of_Protection">Cloak of Protection</a></td><td>400 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Dammon">Dammon</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Dammon">Dammon</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Dammon" id="Sword-of-Life-Stealing"></td><td><img src="imgs/Sword of Life Stealing.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sword_of_Life_Stealing">Sword of Life Stealing</a></td><td>480 gp.</td></tr>
@@ -744,14 +773,14 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Dammon" id="Flawed-Helldusk-Gloves"></td><td><img src="imgs/Flawed Helldusk Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Flawed_Helldusk_Gloves">Flawed Helldusk Gloves</a></td><td>Dammon in the Last Light Inn will craft this item if he is given an Infernal Iron.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Mattis">Mattis</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Mattis">Mattis</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Mattis" id="Evasive-Shoes"></td><td><img src="imgs/Evasive Shoes.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Evasive_Shoes">Evasive Shoes</a></td><td>95 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act2 Mattis" id="Cloak-of-Cunning-Brume"></td><td><img src="imgs/Cloak of Cunning Brume.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloak_of_Cunning_Brume">Cloak of Cunning Brume</a></td><td>200 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Barcus-Wroot">Barcus Wroot</h2>If Barcus is saved in Grymforge he can be found in the Last Light Inn.
+<tr><td colspan=4><h2 class="Act2 section" id="Barcus-Wroot">Barcus Wroot</h2>If Barcus is saved in Grymforge he can be found in the Last Light Inn.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Barcus-Wroot" id="Gloves-of-the-Automaton"></td><td><img src="imgs/Gloves of the Automaton.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gloves_of_the_Automaton">Gloves of the Automaton</a></td><td>290 gp.</td></tr>
@@ -759,7 +788,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Barcus-Wroot" id="Ring-of-Geniality"></td><td><img src="imgs/Ring of Geniality.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Geniality">Ring of Geniality</a></td><td>40 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Reithwin-Town">Reithwin Town</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Reithwin-Town">Reithwin Town</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Reithwin-Town" id="Icebite-Robe"></td><td><img src="imgs/Icebite Robe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Icebite_Robe">Icebite Robe</a></td><td>Icebite Robe is found inside a sarcophagus in the Shadow-Cursed Lands, <b>(X: -158 Y: 73)</b>.</td></tr>
@@ -788,14 +817,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Reithwin-Town" id="Hr'a'cknir-Bracers"></td><td><img src="imgs/Hr'a'cknir Bracers.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hr'a'cknir_Bracers">Hr'a'cknir Bracers</a></td><td>Looted from Ch'r'ai Tska'an in Reithwin Town near the bridge leading to the To Baldur's Gate waypoint.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Gale's-Bonuses">Gale's Bonuses</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act2 Gale's-Bonuses" id="Level-3-Shadow-Spell-Slot"></td><td><img src="imgs/Gale's Bonuses.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Balthazar's_Experiment">Level 3 Shadow Spell Slot</a></td><td>Consume the Shadow Weave from the corpse of Gerringothe Thorm, Malus Thorm or Thisobald Thorm. Once and only as Gale. Cleansing the Shadow Weave grants Mystra's Blessing until Long rest instead.</td></tr>
-<tr><td><input type="checkbox" class="Act2 Gale's-Bonuses" id="Mystra's-Benevolence"></td><td><img src="imgs/Gale's Bonuses.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Balthazar's_Experiment">Mystra's Benevolence</a></td><td>Have Gale destroy the ritual circle in Balthazar's secret room (Advantage to Concentration Checks).</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="House-of-Healing-Morgue">House of Healing Morgue</h2>There are two entrances to this location: one west of the House of Healing and another east of the Grand Mausoleum waypoint through the Ominous Crevice at <b>(X:-150, Y:105)</b>.</td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="House-of-Healing-Morgue">House of Healing Morgue</h2>There are two entrances to this location: one west of the House of Healing and another east of the Grand Mausoleum waypoint through the Ominous Crevice at <b>(X:-150, Y:105)</b>.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 House-of-Healing-Morgue" id="Firzu's-Ring-of-Trading"></td><td><img src="imgs/Firzu's Ring of Trading.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Firzu's_Ring_of_Trading">Firzu's Ring of Trading</a></td><td>On a charred corpse <b>(X: 82 Y: -1006)</b> in the hiddem room immediately south of the entrance hall of the House of Healing Morgue.</td></tr>
@@ -806,7 +828,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 House-of-Healing-Morgue" id="Protective-Plate"></td><td><img src="imgs/Protective Plate.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Protective_Plate">Protective Plate</a></td><td>Looted from Animated Armour at the bottom of the pit in House of Healing Morgue.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Moonrise-Towers">Moonrise Towers</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Moonrise-Towers">Moonrise Towers</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Moonrise-Towers" id="Mind-Flayer-Parasite-Specimen-12"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Two are dropped by the guards in front of the stairs leading to the main entrance, Adept Merim and Zealot Malik.</td></tr>
@@ -831,7 +853,14 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Moonrise-Towers" id="Improved-Bardic-Inspiration"></td><td><img src="imgs/Improved Bardic Inspiration.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bardic_Inspiration">Improved Bardic Inspiration</a></td><td>At the end of Act Two, if Alfira is still alive, she can be found at Moonrise Towers. Talking with her reveals she wants to use music to help calm the tiefling children in the room with her. If the active character is a Bard, they can speak with her again to gain the Improved Bardic Inspiration class action. It's not necessary to perform the song.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Roah-Moonglow">Roah Moonglow</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Gale's-Bonuses">Gale's Bonuses</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act2 Gale's-Bonuses" id="Level-3-Shadow-Spell-Slot"></td><td><img src="imgs/Gale's Bonuses.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Balthazar's_Experiment">Level 3 Shadow Spell Slot</a></td><td>Consume the Shadow Weave from the corpse of Gerringothe Thorm, Malus Thorm or Thisobald Thorm. Once and only as Gale. Cleansing the Shadow Weave grants Mystra's Blessing until Long rest instead.</td></tr>
+<tr><td><input type="checkbox" class="Act2 Gale's-Bonuses" id="Mystra's-Benevolence"></td><td><img src="imgs/Gale's Bonuses.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Balthazar's_Experiment">Mystra's Benevolence</a></td><td>Have Gale destroy the ritual circle in Balthazar's secret room (Advantage to Concentration Checks).</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act2 section" id="Roah-Moonglow">Roah Moonglow</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Roah-Moonglow" id="Sharpened-Snare-Cuirass"></td><td><img src="imgs/Sharpened Snare Cuirass.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sharpened_Snare_Cuirass">Sharpened Snare Cuirass</a></td><td>1494 gp.</td></tr>
@@ -844,7 +873,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Roah-Moonglow" id="Marksmanship-Hat"></td><td><img src="imgs/Marksmanship Hat.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Marksmanship_Hat">Marksmanship Hat</a></td><td>24 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Lann-Tarv">Lann Tarv</h2>You must ask for extra help from Z'rell to unlock his full stock.
+<tr><td colspan=4><h2 class="Act2 section" id="Lann-Tarv">Lann Tarv</h2>You must ask for extra help from Z'rell to unlock his full stock.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Lann-Tarv" id="Halberd-of-Vigilance"></td><td><img src="imgs/Halberd of Vigilance.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Halberd_of_Vigilance">Halberd of Vigilance</a></td><td>1728 gp.</td></tr>
@@ -859,7 +888,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Lann-Tarv" id="Dwarven-Splintmail"></td><td><img src="imgs/Dwarven Splintmail.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Dwarven_Splintmail">Dwarven Splintmail</a></td><td>3420 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Araj-Oblodra">Araj Oblodra</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Araj-Oblodra">Araj Oblodra</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Araj-Oblodra" id="Circlet-of-Hunting"></td><td><img src="imgs/Circlet of Hunting.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Circlet_of_Hunting">Circlet of Hunting</a></td><td>230 gp.</td></tr>
@@ -873,13 +902,13 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Araj-Oblodra" id="Potion-of-Everlasting-Vigour"></td><td><img src="imgs/Potion of Everlasting Vigour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Potion_of_Everlasting_Vigour">Potion of Everlasting Vigour</a></td><td>Convince Astarion to bite Araj Oblodra.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Grand-Mausoleum">Grand Mausoleum</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Grand-Mausoleum">Grand Mausoleum</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Grand-Mausoleum" id="Vivacious-Cloak"></td><td><img src="imgs/Vivacious Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vivacious_Cloak">Vivacious Cloak</a></td><td>Can be looted from a chest <b>(X: -257 Y: -886)</b> in the Grand Mausoleum.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Gauntlet-of-Shar">Gauntlet of Shar</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Gauntlet-of-Shar">Gauntlet of Shar</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Gauntlet-of-Shar" id="Infernal-Iron-5"></td><td><img src="imgs/Infernal Iron.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Iron">Infernal Iron</a></td><td>Inside an Opulent Chest in the vault room near Balthazar, Gauntlet of Shar, <b>(X: -821 Y: -752)</b>.</td></tr>
@@ -897,7 +926,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Gauntlet-of-Shar" id="Dark-Justiciar-Helmet"></td><td><img src="imgs/Dark Justiciar Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Dark_Justiciar_Helmet">Dark Justiciar Helmet</a></td><td>Found inside a Gilded Chest in the Gauntlet of Shar <b>(X: -822 Y: -753)</b>.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Shadowfell">Shadowfell</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Shadowfell">Shadowfell</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Shadowfell" id="Moonlight-Glaive"></td><td><img src="imgs/Moonlight Glaive.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Moonlight_Glaive">Moonlight Glaive</a></td><td>Reward for the quest "The Chosen of Shar", for convincing Shadowheart to free Nightsong in the Shadowfell.</td></tr>
@@ -908,7 +937,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Shadowfell" id="Selûne's-Spear-of-Night"></td><td><img src="imgs/Selûne's Spear of Night.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sel%C3%BBne's_Spear_of_Night">Selûne's Spear of Night</a></td><td>Reward for sparing the Nightsong during Shadowheart's personal quest, The Chosen of Shar. This spear is granted after completing Infiltrate Moonrise Towers, upon speaking to Dame Aylin in camp for the first time.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Mind-Flayer-Colony">Mind Flayer Colony</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Mind-Flayer-Colony">Mind Flayer Colony</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Mind-Flayer-Colony" id="Summon-Us"></td><td><img src="imgs/Summon Us.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Summon_Us">Summon Us</a></td><td>If freed during the Prologue, Us will be found locked in a cage by Chop, in the Mind Flayer Colony <b>(X: 663 Y: -74)</b>.</td></tr>
@@ -925,7 +954,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act2 Mind-Flayer-Colony" id="Mind-Flayer-Parasite-Specimen-20"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>If Isobel was abducted from Last Light Inn, she will have a parasite on her body when you fight her alongside Ketheric.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Meeting-the-Emperor">Meeting the Emperor</h2></td></tr>
+<tr><td colspan=4><h2 class="Act2 section" id="Meeting-the-Emperor">Meeting the Emperor</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act2 Meeting-the-Emperor" id="Boots-of-Uninhibited-Kushigo"></td><td><img src="imgs/Boots of Uninhibited Kushigo.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Boots_of_Uninhibited_Kushigo">Boots of Uninhibited Kushigo</a></td><td>Dropped by Prelate Lir'i'c.</td></tr>
@@ -937,29 +966,15 @@ window.onload = function() {
 <tr><td class="center" colspan=4><h1>Act 3</h1><button onclick="clearCheckboxes('Act3')">Clear</button></td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Rivington">Rivington</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Gur-Camp">Gur Camp</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Corpsegrinder"></td><td><img src="imgs/Corpsegrinder.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Corpsegrinder">Corpsegrinder</a></td><td>Looted from Stone Lord Agents northwest of the Open Hand Temple <b>(X: -210 Y: 99)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Tasha's-Hideous-Laughter"></td><td><img src="imgs/Tasha's Hideous Laughter.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Tasha's_Hideous_Laughter">Tasha's Hideous Laughter</a></td><td>Carry the Sentient Amulet from Grymforge to a casket under the Open Hand Temple in Wyrm's Crossing, completing Help the Cursed Monk. Must choose to accept the curse yourself.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Stillmaker"></td><td><img src="imgs/Stillmaker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Stillmaker">Stillmaker</a></td><td>Found in a hole <b>(X: 67 Y: -1018)</b> in the area underneath the Open Hand Temple. A successful DC5 Perception check is needed to spot it. The hole is just at the top of the cragged rock and can be easy to miss. There is blood right next to the hole.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Mind-Flayer-Parasite-Specimen-21"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a barrel <b>(X: -225 Y: 108)</b> at the docks in Rivington.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Mind-Flayer-Parasite-Specimen-22"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Two are found in Storage <b>(X: -212 Y: 129)</b> on the ship at the Western Beach in Rivington.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Gleamdance-Dagger"></td><td><img src="imgs/Gleamdance Dagger.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gleamdance_Dagger">Gleamdance Dagger</a></td><td>Looted from the body of Farlin in one the beaches and in Sharess' Caress.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Amulet-of-the-Drunkard"></td><td><img src="imgs/Amulet of the Drunkard.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_the_Drunkard">Amulet of the Drunkard</a></td><td>Sold by Hoots Hooligan in Sharess' Caress, found in Wyrm's Crossing.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Bonespike-Boots"></td><td><img src="imgs/Bonespike Boots.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bonespike_Boots">Bonespike Boots</a></td><td>Looted from a trapped Wooden Chest <b>(X: -1340 Y: -857)</b> in a secluded Passageway <b>(X: -233 Y: 84)</b> at the far end of the western trail leading away from the South Span Checkpoint in Rivington.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Ring-of-Truthfulness"></td><td><img src="imgs/Ring of Truthfulness.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Truthfulness">Ring of Truthfulness</a></td><td>Dropped by Mind Flayer hiding in the Windmill Basement of the Abandoned Windmill <b>(X: 44 Y: -38)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Mind-Flayer-Brain"></td><td><img src="imgs/Mind Flayer Brain.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Brain">Mind Flayer Brain</a></td><td>Dropped by Mind Flayer hiding in the Windmill Basement of the Abandoned Windmill <b>(X: 44 Y: -38)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Ring-of-Blink"></td><td><img src="imgs/Ring of Blink.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Blink">Ring of Blink</a></td><td>Steal from or persuade the tressym, Tara, on the roof of the Open Hand Temple <b>(X: -45 Y: -5)</b>. Easily done with Gale in your party.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="The-Undead-Bane"></td><td><img src="imgs/The Undead Bane.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Undead_Bane">The Undead Bane</a></td><td>Carried by Ulma in the Gur Camp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Absolute-Confidence-Amulet"></td><td><img src="imgs/Absolute Confidence Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Absolute_Confidence_Amulet">Absolute Confidence Amulet</a></td><td>Reward for initiating conversation with Naaber multiple times until the option is exhausted in Carm's Garm at Wyrm's Crossing <b>(X: 20 Y: 130)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Seemingly-Gleaming-Ring"></td><td><img src="imgs/Seemingly Gleaming Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Seemingly_Gleaming_Ring">Seemingly Gleaming Ring</a></td><td>An alternate reward for talking to Naaber, if the Absolute Confidence Amulet was pickpocketed from him. Carm's Garm <b>(X: 20 Y: 130)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Seraphic-Pugilist-Gloves"></td><td><img src="imgs/Seraphic Pugilist Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Seraphic_Pugilist_Gloves">Seraphic Pugilist Gloves</a></td><td>Can be found in the southern most locked chest at the foot of the beds at the west end of the Open Hand Temple <b>(X:-90, Y:-7)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Tarnished-Ring"></td><td><img src="imgs/Tarnished Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Tarnished_Ring">Tarnished Ring</a></td><td>To craft it, merge the Ringless Gem (available from Ferg Drogher at <b>(X: 45 Y: -98)</b> or through pickpocketing) with the Gemless Ring (found on the Refugee Corpse at <b>(X: 46 Y: 66)</b> in northeastern Rivington).</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rivington" id="Orphic-Hammer"></td><td><img src="imgs/Orphic Hammer.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Orphic_Hammer">Orphic Hammer</a></td><td>The Orphic Hammer can be obtained by making a deal with Raphael as part of the quest "Deal with the Devil" at Sharess' Caress. If a deal was not made with Raphael, the hammer can instead be stolen from the Archive within the House of Hope.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Gur-Camp" id="The-Undead-Bane"></td><td><img src="imgs/The Undead Bane.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Undead_Bane">The Undead Bane</a></td><td>Carried by Ulma in the Gur Camp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Gur-Camp" id="Ring-of-Truthfulness"></td><td><img src="imgs/Ring of Truthfulness.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Truthfulness">Ring of Truthfulness</a></td><td>Dropped by Mind Flayer hiding in the Windmill Basement of the Abandoned Windmill <b>(X: 44 Y: -38)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Gur-Camp" id="Mind-Flayer-Brain"></td><td><img src="imgs/Mind Flayer Brain.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Brain">Mind Flayer Brain</a></td><td>Dropped by Mind Flayer hiding in the Windmill Basement of the Abandoned Windmill <b>(X: 44 Y: -38)</b>.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Ferg-Drogher">Ferg Drogher</h2>He is the Sharran lookout watching for Shadowheart's return. If Shadowheart is in your party, he will call out, and if you initiate dialogue with him, he will walk away when the dialogue is done, never to return. Ferg has a special stock of goods, which he can be convinced to sell.
+<tr><td colspan=4><h2 class="Act3 section" id="Ferg-Drogher">Ferg Drogher</h2>He is the Sharran lookout at <b>(X: 45 Y: -98)</b> watching for Shadowheart's return. If Shadowheart is in your party, he will call out, and if you initiate dialogue with him, he will walk away when the dialogue is done, never to return. Ferg has a special stock of goods, which he can be convinced to sell.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Ferg-Drogher" id="Cold-Snap"></td><td><img src="imgs/Cold Snap.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cold_Snap">Cold Snap</a></td><td>190 gp.</td></tr>
@@ -968,36 +983,27 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Ferg-Drogher" id="Nymph-Cloak"></td><td><img src="imgs/Nymph Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Nymph_Cloak">Nymph Cloak</a></td><td>360 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act3 Ferg-Drogher" id="Robe-of-Supreme-Defences"></td><td><img src="imgs/Robe of Supreme Defences.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Robe_of_Supreme_Defences">Robe of Supreme Defences</a></td><td>1600 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act3 Ferg-Drogher" id="Sethan"></td><td><img src="imgs/Sethan.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sethan">Sethan</a></td><td>960 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Ferg-Drogher" id="Tarnished-Ring"></td><td><img src="imgs/Tarnished Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Tarnished_Ring">Tarnished Ring</a></td><td>To craft it, merge the Ringless Gem (available from Ferg Drogher or through pickpocketing) with the Gemless Ring (found on the Refugee Corpse at <b>(X: 46 Y: 66)</b> in northeastern Rivington).</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Mattis">Mattis</h2> He will have moved his shop to near the Requisitioned Barn in Rivington..
+<tr><td colspan=4><h2 class="Act3 section" id="Mattis">Mattis</h2> He will have moved his shop to near the Requisitioned Barn in Rivington.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Mattis" id="Corvid-Token"></td><td><img src="imgs/Corvid Token.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Corvid_Token">Corvid Token</a></td><td>460 gp.</td></tr>
 <tr><td><input type="checkbox" class="Act3 Mattis" id="Scabby-Pugilist-Circlet"></td><td><img src="imgs/Scabby Pugilist Circlet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Scabby_Pugilist_Circlet">Scabby Pugilist Circlet</a></td><td>240 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Bumpnagel">Bumpnagel</h2>He is found at Angleiron's Cellar, which can be entered via a cave entrance at <b>(X: 30 Y: 29)</b>.
+<tr><td colspan=4><h2 class="Act3 section" id="Open-Hand-Temple">Open Hand Temple</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Bumpnagel" id="Thunderpalm-Strikers"></td><td><img src="imgs/Thunderpalm Strikers.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Thunderpalm_Strikers">Thunderpalm Strikers</a></td><td>450 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Bumpnagel" id="Nimblefinger-Gloves"></td><td><img src="imgs/Nimblefinger Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Nimblefinger_Gloves">Nimblefinger Gloves</a></td><td>160 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Bumpnagel" id="Martial-Exertion-Gloves"></td><td><img src="imgs/Martial Exertion Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Martial_Exertion_Gloves">Martial Exertion Gloves</a></td><td>160 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Open-Hand-Temple" id="Corpsegrinder"></td><td><img src="imgs/Corpsegrinder.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Corpsegrinder">Corpsegrinder</a></td><td>Looted from Stone Lord Agents northwest of the Open Hand Temple <b>(X: -210 Y: 99)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Open-Hand-Temple" id="Tasha's-Hideous-Laughter"></td><td><img src="imgs/Tasha's Hideous Laughter.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Tasha's_Hideous_Laughter">Tasha's Hideous Laughter</a></td><td>Carry the Sentient Amulet from Grymforge to a casket under the Open Hand Temple in Wyrm's Crossing, completing Help the Cursed Monk. Must choose to accept the curse yourself.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Open-Hand-Temple" id="Seraphic-Pugilist-Gloves"></td><td><img src="imgs/Seraphic Pugilist Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Seraphic_Pugilist_Gloves">Seraphic Pugilist Gloves</a></td><td>Can be found in the southern most locked chest at the foot of the beds at the west end of the Open Hand Temple <b>(X:-90, Y:-7)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Open-Hand-Temple" id="Stillmaker"></td><td><img src="imgs/Stillmaker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Stillmaker">Stillmaker</a></td><td>Found in a hole <b>(X: 67 Y: -1018)</b> in the area underneath the Open Hand Temple. A successful DC5 Perception check is needed to spot it. The hole is just at the top of the cragged rock and can be easy to miss. There is blood right next to the hole.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Open-Hand-Temple" id="Ring-of-Blink"></td><td><img src="imgs/Ring of Blink.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Blink">Ring of Blink</a></td><td>Steal from or persuade the tressym, Tara, on the roof of the Open Hand Temple <b>(X: -45 Y: -5)</b>. Do this with Gale in your party for more loot in the future.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Entharl-Danthelon">Entharl Danthelon</h2>He can be found in Danthelon's Dancing Axe in Wyrm's Crossing.
-
-
-<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Gauntlets-of-the-Warmaster"></td><td><img src="imgs/Gauntlets of the Warmaster.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gauntlets_of_the_Warmaster">Gauntlets of the Warmaster</a></td><td>1600 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Horns-of-the-Berserker"></td><td><img src="imgs/Horns of the Berserker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Horns_of_the_Berserker">Horns of the Berserker</a></td><td>230 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Blightbringer"></td><td><img src="imgs/Blightbringer.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blightbringer">Blightbringer</a></td><td>480 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Snow-Dusted-Monastery-Gloves"></td><td><img src="imgs/Snow-Dusted Monastery Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Snow-Dusted_Monastery_Gloves">Snow-Dusted Monastery Gloves</a></td><td>1125 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Cloak-of-Displacement"></td><td><img src="imgs/Cloak of Displacement.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloak_of_Displacement">Cloak of Displacement</a></td><td>190 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Garb-of-the-Land-and-Sky"></td><td><img src="imgs/Garb of the Land and Sky.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Garb_of_the_Land_and_Sky">Garb of the Land and Sky</a></td><td>800 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Harmonic-Dueller"></td><td><img src="imgs/Harmonic Dueller.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Harmonic_Dueller">Harmonic Dueller</a></td><td>380 gp.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Exxvikyap">Exxvikyap</h2>She is the clerk of the blacksmith shop <b>(X: 8, Y: -32)</b> and an avid fan of its proprietor, Gyldro Angleiron.
+<tr><td colspan=4><h2 class="Act3 section" id="Exxvikyap">Exxvikyap</h2>She is the clerk of the blacksmith shop <b>(X: 8, Y: -32)</b> and an avid fan of its proprietor, Gyldro Angleiron.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Exxvikyap" id="Swires'-Sledboard"></td><td><img src="imgs/Swires' Sledboard.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Swires'_Sledboard">Swires' Sledboard</a></td><td>360 gp.</td></tr>
@@ -1008,7 +1014,15 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Exxvikyap" id="Ambusher"></td><td><img src="imgs/Ambusher.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ambusher">Ambusher</a></td><td>190 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Circus-of-the-Last-Days">Circus of the Last Days</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Bumpnagel">Bumpnagel</h2>He is found at Angleiron's Cellar, which can be entered via a cave entrance at <b>(X: 30 Y: 29)</b>.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Bumpnagel" id="Thunderpalm-Strikers"></td><td><img src="imgs/Thunderpalm Strikers.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Thunderpalm_Strikers">Thunderpalm Strikers</a></td><td>450 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Bumpnagel" id="Nimblefinger-Gloves"></td><td><img src="imgs/Nimblefinger Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Nimblefinger_Gloves">Nimblefinger Gloves</a></td><td>160 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Bumpnagel" id="Martial-Exertion-Gloves"></td><td><img src="imgs/Martial Exertion Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Martial_Exertion_Gloves">Martial Exertion Gloves</a></td><td>160 gp.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Circus-of-the-Last-Days">Circus of the Last Days</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Circus-of-the-Last-Days" id="Comeback-Handaxe"></td><td><img src="imgs/Comeback Handaxe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Comeback_Handaxe">Comeback Handaxe</a></td><td>Won as a consolation prize from Akabi's Wheel of Fortune.</td></tr>
@@ -1025,59 +1039,55 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Circus-of-the-Last-Days" id="Sweet-Stone-Features"></td><td><img src="imgs/Sweet Stone Features.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sweet_Stone_Features_(Condition)">Sweet Stone Features</a></td><td>Equivalent to Bless. Acquired by paying Boney 5000 gold to construct a statue of yourself.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Jungle">Jungle</h2>The player can get teleported here if they win the jackpot in Akabi's spin the wheel game by stealing his Djinni Ring before playing his game.
+<tr><td colspan=4><h2 class="Act3 section" id="Jungle">Jungle</h2>The player can get teleported here if they win the jackpot in Akabi's spin the wheel game by stealing his Djinni Ring before playing his game. You can only visit this area once.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Jungle" id="Band-of-the-Mystic-Scoundrel"></td><td><img src="imgs/Band of the Mystic Scoundrel.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Band_of_the_Mystic_Scoundrel">Band of the Mystic Scoundrel</a></td><td>Looted from a backpack <b>(X: 1566 Y: -1522)</b> in the Jungle.</td></tr>
 <tr><td><input type="checkbox" class="Act3 Jungle" id="Nyrulna"></td><td><img src="imgs/Nyrulna.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Nyrulna">Nyrulna</a></td><td>It is found at 'Jungle' in a DC 20 locked Painted Chest <b>(X: -1511, Y: -1522)</b>, right next to the exit portal.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Lower-City">Lower City</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Rivington-Docks">Rivington Docks</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Unwanted-Masterwork-Gauntlets"></td><td><img src="imgs/Unwanted Masterwork Gauntlets.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Gauntlets">Unwanted Masterwork Gauntlets</a></td><td>Looted from a chest in the basement of the Forge of the Nine <b>(X: 393 Y: 763)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Unwanted-Masterwork-Greaves"></td><td><img src="imgs/Unwanted Masterwork Greaves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Greaves">Unwanted Masterwork Greaves</a></td><td>Looted from a chest in the basement of the Forge of the Nine <b>(X: 393 Y: 763)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Unwanted-Masterwork-Scalemail"></td><td><img src="imgs/Unwanted Masterwork Scalemail.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Scalemail">Unwanted Masterwork Scalemail</a></td><td>Looted from a chest in the basement of the Forge of the Nine <b>(X: 393 Y: 763)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Mind-Flayer-Parasite-Specimen-23"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Dropped by Avery Sonshal in Felogyr's Fireworks.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Infernal-Mace"></td><td><img src="imgs/Infernal Mace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Mace">Infernal Mace</a></td><td>Looted from several Bhaal cultists throughout Chapter 3, including those found in the Steel Watch Foundry and at Felogyr's Fireworks.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Mind-Flayer-Parasite-Specimen-24"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Two are dropped by Sally and Dravo Flymm Dravo Flymm in Flymm's Cobblers.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Cloth-Armour"></td><td><img src="imgs/Cloth Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloth_Armour">Cloth Armour</a></td><td>Found on a table in the south-eastern room of Heapside Prison.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Scarlet-Leather-Armour"></td><td><img src="imgs/Scarlet Leather Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Scarlet_Leather_Armour">Scarlet Leather Armour</a></td><td>You can find it in the Shabby Wardrobe in Ffion Goldgrind's room, located at <b>(X: -14 Y: 75)</b> in Wyrm's Crossing, or you can loot it from Dolor the assassin, who can be found at the Wine Festival <b>(X: 18 Y: -36)</b> in the Lower City of Baldur's Gate.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Spaceshunt-Boots"></td><td><img src="imgs/Spaceshunt Boots.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Spaceshunt_Boots">Spaceshunt Boots</a></td><td>Can be looted from Dolor the assassin, found at the Wine Festival <b>(X: 18 Y: -36)</b> in the Lower City of Baldur's Gate.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Dolor-Amarus"></td><td><img src="imgs/Dolor Amarus.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Dolor_Amarus">Dolor Amarus</a></td><td>Dropped by Dolor at the Wine Festival <b>(X: 18 Y: -36)</b> in the Lower City, it is also sold by Echo of Abazigal in the Murder Tribunal after the player character accepts Bhaal and becomes an Unholy Assassin.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Staff-of-Interruption"></td><td><img src="imgs/Staff of Interruption.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Staff_of_Interruption">Staff of Interruption</a></td><td>Given by Mayrina after you finish the quest "Help the Hag Survivors".</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Anointed-in-Splendour"></td><td><img src="imgs/Anointed in Splendour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Anointed_in_Splendour_(Condition)">Anointed in Splendour</a></td><td>Obtained by making an offering to one of the deities at Stormshore Tabernacle.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Hammer-of-the-Just"></td><td><img src="imgs/Hammer of the Just.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hammer_of_the_Just">Hammer of the Just</a></td><td>Looted from the Offerings to Tyr Chest in the basement of Stormshore Tabernacle in Lower City. (Doing this will inflict the character with Castigated By Divinity.) The basement can be reached by entering the secret hatch in the corner of the tabernacle.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Deva-Mace"></td><td><img src="imgs/Deva Mace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Deva_Mace">Deva Mace</a></td><td>Can be looted from Devas with some work-arounds. A hostile Deva will spawn if a character with Castigated By Divinity is healed.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Amulet-of-the-Devout"></td><td><img src="imgs/Amulet of the Devout.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_the_Devout">Amulet of the Devout</a></td><td>Looted from the main Offering Chest in the basement of Stormshore Tabernacle. Enter the Ornate Wooden Hatch at <b>(X: 105 Y: -26)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Shield-of-Shielding"></td><td><img src="imgs/Shield of Shielding.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shield_of_Shielding">Shield of Shielding</a></td><td>Looted from the main Offering Chest in the basement of Stormshore Tabernacle. Enter the Ornate Wooden Hatch at <b>(X: 105 Y: -26)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Katana"></td><td><img src="imgs/Katana.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Katana">Katana</a></td><td>Lying on a table in Golbraith's Cellar, which can be accessed through a hatch in Golbraith's House <b>(X: -152 Y: -55)</b> which is right next to a manhole in the Lower City that leads to the Lower City Sewers.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Mind-Flayer-Parasite-Specimen-25"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Dropped by Manip Edenosa around Bloomridge Park.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Kurwin's-Cauteriser"></td><td><img src="imgs/Kurwin's Cauteriser.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Kurwin's_Cauteriser">Kurwin's Cauteriser</a></td><td>Looted from Bugthimble in Baldur's Gate Graveyard.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Abdel's-Trusted-Shield"></td><td><img src="imgs/Abdel's Trusted Shield.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Abdel's_Trusted_Shield">Abdel's Trusted Shield</a></td><td>Rewarded from Golbraith in the upper level of his home <b>(X: -148 Y: -60)</b> in the Lower City, after convincing him of your courage against Mind Flayers.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Mind-Flayer-Parasite-Specimen-26"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Two are dropped by Fist 'Deadeye' Mibbs and Fist Healer Darbonna guarding the entrance to the Upper City near the Baldur's Gate Waypoint.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Belm"></td><td><img src="imgs/Belm.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Belm">Belm</a></td><td>Found in an Opulent Chest <b>(X: -1572 Y: 976)</b> in Jaheira's Basement under Elerrathin's Home in the Lower City. The chest is in a room behind a DC18 locked bookcase <b>(X: -1562 Y: 980)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Staff-of-the-Ram"></td><td><img src="imgs/Staff of the Ram.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Staff_of_the_Ram">Staff of the Ram</a></td><td>Found in an Opulent Chest <b>(X: -1572 Y: 976)</b> in Jaheira's Hideout Basement under Elerrathin's Home in the Lower City. The chest is in a room behind a DC18 locked bookcase <b>(X: -1562 Y: 980)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Khalid's-Gift"></td><td><img src="imgs/Khalid's Gift.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Khalid's_Gift">Khalid's Gift</a></td><td>In a display case in Jaheira's Basement.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Till-Death-Do-Us-Part"></td><td><img src="imgs/Till Death Do Us Part.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Till_Death_Do_Us_Part">Till Death Do Us Part</a></td><td>Pickpocket it off Lady Jannath in Lady Jannath's Estate.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="After-Death-Do-Us-Part"></td><td><img src="imgs/After Death Do Us Part.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/After_Death_Do_Us_Part">After Death Do Us Part</a></td><td>Dropped by Oskar Fevras if his affair is exposed to Lady Jannath or if he is killed by Kerri during the quest "Free the Artist". Can also be dropped by Lady Jannath if Oskar wasn't saved in Act One.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Mind-Flayer-Parasite-Specimen-27"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a desk <b>(X: -208 Y: -86)</b> on the second floor of The Lodge.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Unflinching-Protector-Amulet"></td><td><img src="imgs/Unflinching Protector Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unflinching_Protector_Amulet">Unflinching Protector Amulet</a></td><td>Looted from Ptaris in The Lodge Basement Docks under the Society of Brilliance Lodge.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Slayer-Knowledge"></td><td><img src="imgs/Slayer Knowledge.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Slayer_Knowledge">Slayer Knowledge</a></td><td>Granted after reading the book Regarding the Slayer given to you by Volo after saving him.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Mind-Flayer-Parasite-Specimen-28"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Dropped by Churg Elvek around the Grey Harbour Docks.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Wavemother's-Cloak"></td><td><img src="imgs/Wavemother's Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Wavemother's_Cloak">Wavemother's Cloak</a></td><td>Looted from a chest in Water Queen's House <b>(X: -248 Y: -249)</b> in the Lower City of Baldur's Gate.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City" id="Wavemother's-Robe"></td><td><img src="imgs/Wavemother's Robe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Wavemother's_Robe">Wavemother's Robe</a></td><td>Finish the quest "Avenge the Drowned".</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rivington-Docks" id="Mind-Flayer-Parasite-Specimen-21"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a barrel <b>(X: -225 Y: 108)</b> at the docks in Rivington.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rivington-Docks" id="Mind-Flayer-Parasite-Specimen-22"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Two are found in Storage <b>(X: -212 Y: 129)</b> on the ship at the Western Beach in Rivington.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rivington-Docks" id="Bonespike-Boots"></td><td><img src="imgs/Bonespike Boots.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bonespike_Boots">Bonespike Boots</a></td><td>Looted from a trapped Wooden Chest <b>(X: -1340 Y: -857)</b> in a secluded Passageway <b>(X: -233 Y: 84)</b> at the far end of the western trail leading away from the South Span Checkpoint in Rivington.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Dammon">Dammon</h2>He can be found at the Forge of the Nine <b>(X: -2 Y: -8)</b>.
+<tr><td colspan=4><h2 class="Act3 section" id="Wyrm's-Crossing">Wyrm's Crossing</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Dammon" id="Legacy-of-the-Masters"></td><td><img src="imgs/Legacy of the Masters.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Legacy_of_the_Masters">Legacy of the Masters</a></td><td>570 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Dammon" id="Boots-of-Persistence"></td><td><img src="imgs/Boots of Persistence.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Boots_of_Persistence">Boots of Persistence</a></td><td>1300 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Dammon" id="Armour-of-Persistence"></td><td><img src="imgs/Armour of Persistence.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_Persistence">Armour of Persistence</a></td><td>16000 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Wyrm's-Crossing" id="Gleamdance-Dagger"></td><td><img src="imgs/Gleamdance Dagger.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gleamdance_Dagger">Gleamdance Dagger</a></td><td>Looted from the body of Farlin in one the beaches and in Sharess' Caress.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Wyrm's-Crossing" id="Amulet-of-the-Drunkard"></td><td><img src="imgs/Amulet of the Drunkard.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_the_Drunkard">Amulet of the Drunkard</a></td><td>Sold by Hoots Hooligan in Sharess' Caress, found in Wyrm's Crossing.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Wyrm's-Crossing" id="Absolute-Confidence-Amulet"></td><td><img src="imgs/Absolute Confidence Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Absolute_Confidence_Amulet">Absolute Confidence Amulet</a></td><td>Reward for initiating conversation with Naaber multiple times until the option is exhausted in Carm's Garm at Wyrm's Crossing <b>(X: 20 Y: 130)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Wyrm's-Crossing" id="Seemingly-Gleaming-Ring"></td><td><img src="imgs/Seemingly Gleaming Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Seemingly_Gleaming_Ring">Seemingly Gleaming Ring</a></td><td>An alternate reward for talking to Naaber, if the Absolute Confidence Amulet was pickpocketed from him. Carm's Garm <b>(X: 20 Y: 130)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Wyrm's-Crossing" id="Orphic-Hammer"></td><td><img src="imgs/Orphic Hammer.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Orphic_Hammer">Orphic Hammer</a></td><td>The Orphic Hammer can be obtained by making a deal with Raphael as part of the quest "Deal with the Devil" at Sharess' Caress. If a deal was not made with Raphael, the hammer can instead be stolen from the Archive within the House of Hope.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Vicar-Humbletoes">Vicar Humbletoes</h2>He is the guardian of the Stormshore Tabernacle (near the 'Basilisk Gate' waypoint) and a merchant that players can trade with.
+<tr><td colspan=4><h2 class="Act3 section" id="Entharl-Danthelon">Entharl Danthelon</h2>He can be found in Danthelon's Dancing Axe in Wyrm's Crossing.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Gauntlets-of-the-Warmaster"></td><td><img src="imgs/Gauntlets of the Warmaster.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gauntlets_of_the_Warmaster">Gauntlets of the Warmaster</a></td><td>1600 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Horns-of-the-Berserker"></td><td><img src="imgs/Horns of the Berserker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Horns_of_the_Berserker">Horns of the Berserker</a></td><td>230 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Blightbringer"></td><td><img src="imgs/Blightbringer.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blightbringer">Blightbringer</a></td><td>480 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Snow-Dusted-Monastery-Gloves"></td><td><img src="imgs/Snow-Dusted Monastery Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Snow-Dusted_Monastery_Gloves">Snow-Dusted Monastery Gloves</a></td><td>1125 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Cloak-of-Displacement"></td><td><img src="imgs/Cloak of Displacement.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloak_of_Displacement">Cloak of Displacement</a></td><td>190 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Garb-of-the-Land-and-Sky"></td><td><img src="imgs/Garb of the Land and Sky.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Garb_of_the_Land_and_Sky">Garb of the Land and Sky</a></td><td>800 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Entharl-Danthelon" id="Harmonic-Dueller"></td><td><img src="imgs/Harmonic Dueller.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Harmonic_Dueller">Harmonic Dueller</a></td><td>380 gp.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Stormshore-Tabernacle">Basilisk Gate</h2>Encountered just after traveling to the Lower City.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Stormshore-Tabernacle" id="Cloth-Armour"></td><td><img src="imgs/Cloth Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloth_Armour">Cloth Armour</a></td><td>Found on a table in the south-eastern room of Heapside Prison.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Stormshore-Tabernacle" id="Anointed-in-Splendour"></td><td><img src="imgs/Anointed in Splendour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Anointed_in_Splendour_(Condition)">Anointed in Splendour</a></td><td>Obtained by making an offering to one of the deities at Stormshore Tabernacle.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Stormshore-Tabernacle" id="Hammer-of-the-Just"></td><td><img src="imgs/Hammer of the Just.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hammer_of_the_Just">Hammer of the Just</a></td><td>Looted from the Offerings to Tyr Chest in the basement of Stormshore Tabernacle in Lower City. (Doing this will inflict the character with Castigated By Divinity.) The basement can be reached by entering the secret hatch in the corner of the tabernacle.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Stormshore-Tabernacle" id="Deva-Mace"></td><td><img src="imgs/Deva Mace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Deva_Mace">Deva Mace</a></td><td>Can be looted from Devas with some work-arounds. A hostile Deva will spawn if a character with Castigated By Divinity is healed.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Stormshore-Tabernacle" id="Amulet-of-the-Devout"></td><td><img src="imgs/Amulet of the Devout.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_the_Devout">Amulet of the Devout</a></td><td>Looted from the main Offering Chest in the basement of Stormshore Tabernacle. Enter the Ornate Wooden Hatch at <b>(X: 105 Y: -26)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Stormshore-Tabernacle" id="Shield-of-Shielding"></td><td><img src="imgs/Shield of Shielding.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shield_of_Shielding">Shield of Shielding</a></td><td>Looted from the main Offering Chest in the basement of Stormshore Tabernacle. Enter the Ornate Wooden Hatch at <b>(X: 105 Y: -26)</b>.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Vicar-Humbletoes">Vicar Humbletoes</h2>He is the guardian of the Stormshore Tabernacle (near the 'Basilisk Gate' waypoint) and a merchant that players can trade with.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Vicar-Humbletoes" id="The-Reviving-Hands"></td><td><img src="imgs/The Reviving Hands.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Reviving_Hands">The Reviving Hands</a></td><td>912 gp.</td></tr>
@@ -1085,7 +1095,55 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Vicar-Humbletoes" id="The-Sacred-Star"></td><td><img src="imgs/The Sacred Star.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Sacred_Star">The Sacred Star</a></td><td>770 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Tara">Tara</h2>If spoken to with Gale in the party during the quest "Find the Missing Letters", Tara appears on various rooftops in Lower City.
+<tr><td colspan=4><h2 class="Act3 section" id="Elfsong-Tavern">Elfsong Tavern</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Elfsong-Tavern" id="Keepsake-Ring"></td><td><img src="imgs/Keepsake Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Keepsake_Ring">Keepsake Ring</a></td><td>Can be found on the floor of the Elfsong Tavern Basement <b>(X: -859 Y: 531)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Elfsong-Tavern" id="Cerebral-Citadel-Armour"></td><td><img src="imgs/Cerebral Citadel Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cerebral_Citadel_Armour">Cerebral Citadel Armour</a></td><td>Located inside the Hidden Room in the Elfsong Tavern Basement <b>(X: 728 Y: 588)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Elfsong-Tavern" id="Cerebral-Citadel-Gloves"></td><td><img src="imgs/Cerebral Citadel Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cerebral_Citadel_Gloves">Cerebral Citadel Gloves</a></td><td>Located inside the Hidden Room in the Elfsong Tavern Basement <b>(X: 728 Y: 588)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Elfsong-Tavern" id="Sword-of-the-Emperor"></td><td><img src="imgs/Sword of the Emperor.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sword_of_the_Emperor">Sword of the Emperor</a></td><td>Found during the quest "Visit the Emperor's Old Hideout" under the Elfsong Tavern.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Elfsong-Tavern" id="Boots-of-Psionic-Movement"></td><td><img src="imgs/Boots of Psionic Movement.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Boots_of_Psionic_Movement">Boots of Psionic Movement</a></td><td>Looted from Ch'r'ai Har'rak in Knights of the Shield Hideout.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Forge-of-the-Nine">Forge of the Nine</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Forge-of-the-Nine" id="Kurwin's-Cauteriser"></td><td><img src="imgs/Kurwin's Cauteriser.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Kurwin's_Cauteriser">Kurwin's Cauteriser</a></td><td>Looted from Bugthimble in Baldur's Gate Graveyard.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Forge-of-the-Nine" id="Unwanted-Masterwork-Gauntlets"></td><td><img src="imgs/Unwanted Masterwork Gauntlets.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Gauntlets">Unwanted Masterwork Gauntlets</a></td><td>Looted from a chest in the basement of the Forge of the Nine <b>(X: 393 Y: 763)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Forge-of-the-Nine" id="Unwanted-Masterwork-Greaves"></td><td><img src="imgs/Unwanted Masterwork Greaves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Greaves">Unwanted Masterwork Greaves</a></td><td>Looted from a chest in the basement of the Forge of the Nine <b>(X: 393 Y: 763)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Forge-of-the-Nine" id="Unwanted-Masterwork-Scalemail"></td><td><img src="imgs/Unwanted Masterwork Scalemail.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Scalemail">Unwanted Masterwork Scalemail</a></td><td>Looted from a chest in the basement of the Forge of the Nine <b>(X: 393 Y: 763)</b>.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Dammon">Dammon</h2>He can be found at the Forge of the Nine <b>(X: -2 Y: -8)</b>.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Dammon" id="Legacy-of-the-Masters"></td><td><img src="imgs/Legacy of the Masters.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Legacy_of_the_Masters">Legacy of the Masters</a></td><td>570 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Dammon" id="Boots-of-Persistence"></td><td><img src="imgs/Boots of Persistence.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Boots_of_Persistence">Boots of Persistence</a></td><td>1300 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Dammon" id="Armour-of-Persistence"></td><td><img src="imgs/Armour of Persistence.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_Persistence">Armour of Persistence</a></td><td>16000 gp.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Helsik">Helsik</h2>She is found inside the Devil's Fee shop.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Gemini-Gloves"></td><td><img src="imgs/Gemini Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gemini_Gloves">Gemini Gloves</a></td><td>720 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Cloak-of-the-Weave"></td><td><img src="imgs/Cloak of the Weave.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloak_of_the_Weave">Cloak of the Weave</a></td><td>300 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Shapeshifter-Hat"></td><td><img src="imgs/Shapeshifter Hat.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shapeshifter_Hat">Shapeshifter Hat</a></td><td>70 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Spellseeking-Gloves"></td><td><img src="imgs/Spellseeking Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Spellseeking_Gloves">Spellseeking Gloves</a></td><td>160 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Gibus-of-the-Worshipful-Servant"></td><td><img src="imgs/Gibus of the Worshipful Servant.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gibus_of_the_Worshipful_Servant">Gibus of the Worshipful Servant</a></td><td>35 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Hellbeard-Halberd"></td><td><img src="imgs/Hellbeard Halberd.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hellbeard_Halberd">Hellbeard Halberd</a></td><td>380 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Caitiff-Staff"></td><td><img src="imgs/Caitiff Staff.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Caitiff_Staff">Caitiff Staff</a></td><td>190 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Helsik" id="Mask-of-Soul-Perception"></td><td><img src="imgs/Mask of Soul Perception.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mask_of_Soul_Perception">Mask of Soul Perception</a></td><td>1300 gp.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Wine-Festival">Wine Festival</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Wine-Festival" id="Scarlet-Leather-Armour"></td><td><img src="imgs/Scarlet Leather Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Scarlet_Leather_Armour">Scarlet Leather Armour</a></td><td>You can find it in the Shabby Wardrobe in Ffion Goldgrind's room, located at <b>(X: -14 Y: 75)</b> in Wyrm's Crossing, or you can loot it from Dolor the assassin, who can be found at the Wine Festival <b>(X: 18 Y: -36)</b> in the Lower City of Baldur's Gate.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Wine-Festival" id="Spaceshunt-Boots"></td><td><img src="imgs/Spaceshunt Boots.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Spaceshunt_Boots">Spaceshunt Boots</a></td><td>Can be looted from Dolor the assassin, found at the Wine Festival <b>(X: 18 Y: -36)</b> in the Lower City of Baldur's Gate.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Wine-Festival" id="Dolor-Amarus"></td><td><img src="imgs/Dolor Amarus.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Dolor_Amarus">Dolor Amarus</a></td><td>Dropped by Dolor at the Wine Festival <b>(X: 18 Y: -36)</b> in the Lower City, it is also sold by Echo of Abazigal in the Murder Tribunal after the player character accepts Bhaal and becomes an Unholy Assassin.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Tara">Tara</h2>If spoken to with Gale in the party during the quest "Find the Missing Letters", Tara appears on various rooftops in Lower City.</td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Tara" id="Slinging-Shoes"></td><td><img src="imgs/Slinging Shoes.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Slinging_Shoes">Slinging Shoes</a></td><td>Sold by Tara in the Lower City, she can be found on the roof of Highberry's Home (the house hosting the Wine Festival) at <b>(X: -1 Y: -39)</b>; Tara only accepts Fish and/or magical items in exchange for this item.</td></tr>
@@ -1093,17 +1151,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Tara" id="Tressym-Collar"></td><td><img src="imgs/Tressym Collar.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Tressym Collar">Tressym Collar</a></td><td>Looted from Tara.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Emperor's-Old-Hideout">Emperor's Old Hideout</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act3 Emperor's-Old-Hideout" id="Keepsake-Ring"></td><td><img src="imgs/Keepsake Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Keepsake_Ring">Keepsake Ring</a></td><td>Can be found on the floor of the Elfsong Tavern Basement <b>(X: -859 Y: 531)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Emperor's-Old-Hideout" id="Boots-of-Psionic-Movement"></td><td><img src="imgs/Boots of Psionic Movement.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Boots_of_Psionic_Movement">Boots of Psionic Movement</a></td><td>Looted from Ch'r'ai Har'rak in Knights of the Shield Hideout.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Emperor's-Old-Hideout" id="Sword-of-the-Emperor"></td><td><img src="imgs/Sword of the Emperor.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sword_of_the_Emperor">Sword of the Emperor</a></td><td>Found during the quest "Visit the Emperor's Old Hideout" under the Elfsong Tavern.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Emperor's-Old-Hideout" id="Cerebral-Citadel-Armour"></td><td><img src="imgs/Cerebral Citadel Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cerebral_Citadel_Armour">Cerebral Citadel Armour</a></td><td>Located inside the Hidden Room in the Elfsong Tavern Basement <b>(X: 728 Y: 588)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Emperor's-Old-Hideout" id="Cerebral-Citadel-Gloves"></td><td><img src="imgs/Cerebral Citadel Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cerebral_Citadel_Gloves">Cerebral Citadel Gloves</a></td><td>Located inside the Hidden Room in the Elfsong Tavern Basement <b>(X: 728 Y: 588)</b>.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Stormshore-Armoury">Stormshore Armoury</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Stormshore-Armoury">Stormshore Armoury</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Stormshore-Armoury" id="Armour-of-Agility"></td><td><img src="imgs/Armour of Agility.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_Agility">Armour of Agility</a></td><td>2900 gp.</td></tr>
@@ -1111,32 +1159,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Stormshore-Armoury" id="The-Dead-Shot"></td><td><img src="imgs/The Dead Shot.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Dead_Shot">The Dead Shot</a></td><td>770 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="The-Counting-House">The Counting House</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Nymph-Cloak"></td><td><img src="imgs/Nymph Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Nymph_Cloak">Nymph Cloak</a></td><td>Looted from the High Security Vault n°1 in The Counting House in the Lower City of Baldur's Gate. Sold by Ferg Drogher in Rivington. Special wares.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Spell-Savant-Amulet"></td><td><img src="imgs/Spell Savant Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Spell_Savant_Amulet">Spell Savant Amulet</a></td><td>Looted from High Security Vault n°1 in The Counting House.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Jannath's-Hat"></td><td><img src="imgs/Jannath's Hat.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Jannath's_Hat">Jannath's Hat</a></td><td>Looted from High Security Vault n°2 in The Counting House.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="The-Long-Arm-of-the-Gur"></td><td><img src="imgs/The Long Arm of the Gur.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Long_Arm_of_the_Gur">The Long Arm of the Gur</a></td><td>Looted from High Security Vault n°3 in The Counting House.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Trident-of-the-Waves"></td><td><img src="imgs/Trident of the Waves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Trident_of_the_Waves">Trident of the Waves</a></td><td>Looted from High Security Vault n°4 in The Counting House.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Ravengard's-Scourger"></td><td><img src="imgs/Ravengard's Scourger.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ravengard's_Scourger">Ravengard's Scourger</a></td><td>Looted from High Security Vault n°5 in The Counting House.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Mind-Flayer-Parasite-Specimen-29"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Looted from High Security Vault n°6 in The Counting House.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Knock-Knuckle-Gloves"></td><td><img src="imgs/Knock Knuckle Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Knock_Knuckle_Gloves">Knock Knuckle Gloves</a></td><td>Looted from High Security Vault n°7 in The Counting House.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Elegant-Studded-Leather"></td><td><img src="imgs/Elegant Studded Leather.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Elegant_Studded_Leather">Elegant Studded Leather</a></td><td>Looted from High Security Vault n°9 (inside the big vault at the back of the room) in The Counting House of the Lower City. A key for this vault can be obtained by completing Return Rakath's Gold.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Philgrave's-Mansion">Philgrave's Mansion</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Veil-of-the-Morning"></td><td><img src="imgs/Veil of the Morning.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Veil_of_the_Morning">Veil of the Morning</a></td><td>1600 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Armour-of-the-Sporekeeper"></td><td><img src="imgs/Armour of the Sporekeeper.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_the_Sporekeeper">Armour of the Sporekeeper</a></td><td>1400 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Hood-of-the-Weave"></td><td><img src="imgs/Hood of the Weave.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hood_of_the_Weave">Hood of the Weave</a></td><td>70 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Staff-of-Cherished-Necromancy"></td><td><img src="imgs/Staff of Cherished Necromancy.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Staff_of_Cherished_Necromancy">Staff of Cherished Necromancy</a></td><td>Can be looted from Mystic Carrion.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Crypt-Lord-Ring"></td><td><img src="imgs/Crypt Lord Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Crypt_Lord_Ring">Crypt Lord Ring</a></td><td>Rewarded for completion of "Find Mystic Carrion's Servant" if Thrumbo survives.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Torch-of-Revocation"></td><td><img src="imgs/Torch of Revocation.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Torch_of_Revocation">Torch of Revocation</a></td><td>Dropped by Mystic Carrion, given as a potential reward for Find Mystic Carrion's Servant, or sold by him through dialogue for 3000 gold. Can also be stolen from the locked chest behind him.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Sorcerous-Sundries">Sorcerous Sundries</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Sorcerous-Sundries">Sorcerous Sundries</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Sorcerous-Sundries" id="Mind-Flayer-Parasite-Specimen-30"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a table <b>(X: -9 Y: -92)</b> at Sorcerous Sundries.</td></tr>
@@ -1154,53 +1177,60 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Sorcerous-Sundries" id="Markoheshkir"></td><td><img src="imgs/Markoheshkir.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Markoheshkir">Markoheshkir</a></td><td>Located inside an Globe of Invulnerability in Ramazith's Tower during Act Three. (Use See Invisibility to see the lever and disable the globe)</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Rolan---Lorroakan's Projection">Rolan / Lorroakan's Projection</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Rolan-Lorroakan's-Projection">Rolan / Lorroakan's Projection</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Rolan---Lorroakan's Projection" id="Quickspell-Gloves"></td><td><img src="imgs/Quickspell Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Quickspell_Gloves">Quickspell Gloves</a></td><td>750 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rolan---Lorroakan's Projection" id="Ring-of-Regeneration"></td><td><img src="imgs/Ring of Regeneration.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Regeneration">Ring of Regeneration</a></td><td>360 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rolan---Lorroakan's Projection" id="Vest-of-Soul-Rejuvenation"></td><td><img src="imgs/Vest of Soul Rejuvenation.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vest_of_Soul_Rejuvenation">Vest of Soul Rejuvenation</a></td><td>4160 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rolan---Lorroakan's Projection" id="Armour-of-Landfall"></td><td><img src="imgs/Armour of Landfall.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_Landfall">Armour of Landfall</a></td><td>1700 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rolan---Lorroakan's Projection" id="Birthright"></td><td><img src="imgs/Birthright.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Birthright">Birthright</a></td><td>410 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Rolan---Lorroakan's Projection" id="Harper-Sacredstriker"></td><td><img src="imgs/Harper Sacredstriker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Harper_Sacredstriker">Harper Sacredstriker</a></td><td>310 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rolan-Lorroakan's-Projection" id="Quickspell-Gloves"></td><td><img src="imgs/Quickspell Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Quickspell_Gloves">Quickspell Gloves</a></td><td>750 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rolan-Lorroakan's-Projection" id="Ring-of-Regeneration"></td><td><img src="imgs/Ring of Regeneration.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Regeneration">Ring of Regeneration</a></td><td>360 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rolan-Lorroakan's-Projection" id="Vest-of-Soul-Rejuvenation"></td><td><img src="imgs/Vest of Soul Rejuvenation.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vest_of_Soul_Rejuvenation">Vest of Soul Rejuvenation</a></td><td>4160 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rolan-Lorroakan's-Projection" id="Armour-of-Landfall"></td><td><img src="imgs/Armour of Landfall.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_Landfall">Armour of Landfall</a></td><td>1700 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rolan-Lorroakan's-Projection" id="Birthright"></td><td><img src="imgs/Birthright.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Birthright">Birthright</a></td><td>410 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Rolan-Lorroakan's-Projection" id="Harper-Sacredstriker"></td><td><img src="imgs/Harper Sacredstriker.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Harper_Sacredstriker">Harper Sacredstriker</a></td><td>310 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Steel-Watch-Foundry">Steel Watch Foundry</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Felogyr's-Fireworks">Felogyr's Fireworks</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Steelwatcher-Helmet"></td><td><img src="imgs/Steelwatcher Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Steelwatcher_Helmet">Steelwatcher Helmet</a></td><td>Can be found on a table on the ground floor.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Mind-Flayer-Parasite-Specimen-31"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a table <b>(X: -1937 Y: 447)</b> in the Steel Watch Foundry - Lab Level.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Hellfire-Engine-Crossbow"></td><td><img src="imgs/Hellfire Engine Crossbow.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hellfire_Engine_Crossbow">Hellfire Engine Crossbow</a></td><td>Crafted by combining three components found on the main floor of the Steel Watch Foundry at the table <b>(X: -325 Y: -134)</b> in the Security Office, the Watcher Crossbow Blueprint can be located on a table at coordinates <b>(X: -330 Y: -157)</b> within the Security Office. Additionally, the Targeting Module can be discovered on a table at <b>(X: -307 Y: -157)</b> on the main floor right next to the plaque labeled "Watcher Targeting Module." Lastly, the Steel Watcher Arm is situated on a table at <b>(X: -280 Y: -165)</b> on the main floor, adjacent to the plaque labeled "Steel Watcher Arm Unit."</td></tr>
-<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Winkling-Gloves"></td><td><img src="imgs/Winkling Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Winkling_Gloves">Winkling Gloves</a></td><td>Carried by Zanner Toobin in the western-most room on the ground floor or later accompanying the party in the basement during the quest "Save the Gondians".</td></tr>
-<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Gontr-Mael"></td><td><img src="imgs/Gontr Mael.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gontr_Mael">Gontr Mael</a></td><td>Looted from the Steel Watcher Titan in Steel Watch Foundry.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Felogyr's-Fireworks" id="Mind-Flayer-Parasite-Specimen-23"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Dropped by Avery Sonshal in Felogyr's Fireworks.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Felogyr's-Fireworks" id="Infernal-Mace"></td><td><img src="imgs/Infernal Mace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Mace">Infernal Mace</a></td><td>Looted from several Bhaal cultists throughout Chapter 3, including those found in the Steel Watch Foundry and at Felogyr's Fireworks.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Felogyr's-Fireworks" id="Mind-Flayer-Parasite-Specimen-24"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Two are dropped by Sally and Dravo Flymm in Flymm's Cobblers which is next door to Felogyr's Fireworks.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Felogyr's-Fireworks" id="Staff-of-Interruption"></td><td><img src="imgs/Staff of Interruption.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Staff_of_Interruption">Staff of Interruption</a></td><td>Given by Mayrina after you finish the quest "Help the Hag Survivors". She is found in the decrepit house southwest of Felogyr's Fireworks.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Felogyr's-Fireworks" id="Fey-Semblance-Amulet"></td><td><img src="imgs/Fey Semblance Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Fey_Semblance_Amulet">Fey Semblance Amulet</a></td><td>Rewarded for completing "Avenge the Hag Survivors".</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Flymm-Cargo">Flymm Cargo</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Philgrave's-Mansion">Philgrave's Mansion</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Flymm-Cargo" id="Mind-Flayer-Parasite-Specimen-32"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Six are found in Wooden Trunks, on a ship just east of the Steel Watch Foundry.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Flymm-Cargo" id="Infernal-Iron-6"></td><td><img src="imgs/Infernal Iron.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Iron">Infernal Iron</a></td><td>Found on the floor in Flymm Cargo's Basement <b>(X: -1078 Y: 312)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Flymm-Cargo" id="Wavemother's-Sickle"></td><td><img src="imgs/Wavemother's Sickle.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Wavemother's_Sickle">Wavemother's Sickle</a></td><td>Looted from Allandra Grey (If you spared Redhammer).</td></tr>
+<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Veil-of-the-Morning"></td><td><img src="imgs/Veil of the Morning.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Veil_of_the_Morning">Veil of the Morning</a></td><td>1600 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Armour-of-the-Sporekeeper"></td><td><img src="imgs/Armour of the Sporekeeper.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_the_Sporekeeper">Armour of the Sporekeeper</a></td><td>1400 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Hood-of-the-Weave"></td><td><img src="imgs/Hood of the Weave.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hood_of_the_Weave">Hood of the Weave</a></td><td>70 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Staff-of-Cherished-Necromancy"></td><td><img src="imgs/Staff of Cherished Necromancy.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Staff_of_Cherished_Necromancy">Staff of Cherished Necromancy</a></td><td>Can be looted from Mystic Carrion.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Crypt-Lord-Ring"></td><td><img src="imgs/Crypt Lord Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Crypt_Lord_Ring">Crypt Lord Ring</a></td><td>Rewarded for completion of "Find Mystic Carrion's Servant" if Thrumbo survives.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Philgrave's-Mansion" id="Torch-of-Revocation"></td><td><img src="imgs/Torch of Revocation.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Torch_of_Revocation">Torch of Revocation</a></td><td>Dropped by Mystic Carrion, given as a potential reward for Find Mystic Carrion's Servant, or sold by him through dialogue for 3000 gold. Can also be stolen from the locked chest behind him.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Iron-Throne">Iron Throne</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Guildhall">Guildhall</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Iron-Throne" id="Duke-Ravengard's-Longsword"></td><td><img src="imgs/Duke Ravengard's Longsword.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Duke_Ravengard's_Longsword">Duke Ravengard's Longsword</a></td><td>The sword can be obtained without requiring Duke Ulder Ravengard's death by having him use the Throw action when he becomes a temporary companion during the quest "The Grand Duke", making it available for looting.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Iron-Throne" id="Emblazoned-Plate-of-the-Marshal"></td><td><img src="imgs/Emblazoned Plate of the Marshal.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Emblazoned_Plate_of_the_Marshal">Emblazoned Plate of the Marshal</a></td><td>Can be looted from Duke Ulder Ravengard.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Iron-Throne" id="Mind-Flayer-Parasite-Specimen-33"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a table <b>(X: -45 Y: 18)</b> inside a flooded room in the Iron Throne if Omeluum was not killed and Lady Esther was not given a githyanki egg in the quest "Steal a Githyanki Egg".</td></tr>
+<tr><td><input type="checkbox" class="Act3 Guildhall" id="Drunken-Cloth"></td><td><img src="imgs/Drunken Cloth.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Drunken_Cloth">Drunken Cloth</a></td><td>Purchased from Bar Tender Severn <b>(X: -19 Y: 765)</b> for 800 gp or stolen from him.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Guildhall" id="Shade-Slayer-Cloak"></td><td><img src="imgs/Shade-Slayer Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shade-Slayer_Cloak">Shade-Slayer Cloak</a></td><td>Purchased from Sticky Dondo<b>(X: -17 Y: 755)</b> for 360 gp.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="House-of-Grief">House of Grief</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="The-Counting-House">The Counting House</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Handmaiden's-Mace"></td><td><img src="imgs/Handmaiden's Mace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Handmaiden's_Mace">Handmaiden's Mace</a></td><td>Dropped by Viconia DeVir <b>(X: -400 Y: -1651)</b> in the Cloister of Sombre Embrace beneath the House of Grief.</td></tr>
-<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Viconia's-Priestess-Robe"></td><td><img src="imgs/Viconia's Priestess Robe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Viconia's_Priestess_Robe">Viconia's Priestess Robe</a></td><td>Worn by Viconia DeVir, Mother Superior of the Shar Enclave under the House of Grief.</td></tr>
-<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Mirror-of-Loss"></td><td><img src="imgs/Mirror of Loss.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mirror_of_Loss">Mirror of Loss</a></td><td>Offer a prayer (DC 25 Religion Check) to the Mirror of Loss in the House of Grief, then sacrifice one of the following: Constitution, Wisdom, Charisma, or your knowledge of the Necromancy of Thay. You'll receive the option to choose a +2 bonus to any ability (Can be raised above 20, up to 24).</td></tr>
-<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Viconia's-Walking-Fortress"></td><td><img src="imgs/Viconia's Walking Fortress.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Viconia's_Walking_Fortress">Viconia's Walking Fortress</a></td><td>Looted from Viconia DeVir during the quest "Daughter of Darkness".</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Nymph-Cloak"></td><td><img src="imgs/Nymph Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Nymph_Cloak">Nymph Cloak</a></td><td>Looted from the High Security Vault n°1 in The Counting House in the Lower City of Baldur's Gate. Sold by Ferg Drogher in Rivington. Special wares.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Spell-Savant-Amulet"></td><td><img src="imgs/Spell Savant Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Spell_Savant_Amulet">Spell Savant Amulet</a></td><td>Looted from High Security Vault n°1 in The Counting House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Jannath's-Hat"></td><td><img src="imgs/Jannath's Hat.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Jannath's_Hat">Jannath's Hat</a></td><td>Looted from High Security Vault n°2 in The Counting House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="The-Long-Arm-of-the-Gur"></td><td><img src="imgs/The Long Arm of the Gur.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/The_Long_Arm_of_the_Gur">The Long Arm of the Gur</a></td><td>Looted from High Security Vault n°3 in The Counting House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Trident-of-the-Waves"></td><td><img src="imgs/Trident of the Waves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Trident_of_the_Waves">Trident of the Waves</a></td><td>Looted from High Security Vault n°4 in The Counting House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Ravengard's-Scourger"></td><td><img src="imgs/Ravengard's Scourger.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ravengard's_Scourger">Ravengard's Scourger</a></td><td>Looted from High Security Vault n°5 in The Counting House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Mind-Flayer-Parasite-Specimen-29"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Looted from High Security Vault n°6 in The Counting House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Knock-Knuckle-Gloves"></td><td><img src="imgs/Knock Knuckle Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Knock_Knuckle_Gloves">Knock Knuckle Gloves</a></td><td>Looted from High Security Vault n°7 in The Counting House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Counting-House" id="Elegant-Studded-Leather"></td><td><img src="imgs/Elegant Studded Leather.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Elegant_Studded_Leather">Elegant Studded Leather</a></td><td>Looted from High Security Vault n°9 (inside the big vault at the back of the room) in The Counting House of the Lower City. A key for this vault can be obtained by completing Return Rakath's Gold.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="The-Blushing-Mermaid">The Blushing Mermaid</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="The-Blushing-Mermaid">The Blushing Mermaid</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Unstable-Blood"></td><td><img src="imgs/Unstable Blood.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unstable_Blood">Unstable Blood</a></td><td>Give your blood to Araj Oblodra in Moonrise Towers in Act 2, then meet her again east of The Blushing Mermaid in Act 3 and help her again (Your blood is now highly flammable and will explode on contact with fire).</td></tr>
@@ -1208,18 +1238,14 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Salty-Scimitar(rrr)"></td><td><img src="imgs/Salty Scimitar(rrr).png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Salty_Scimitar(rrr)">Salty Scimitar(rrr)</a></td><td>Looted from the real Captain Grisly in the basement <b>(X: -2339 Y: -127)</b>.</td></tr>
 <tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Mind-Flayer-Parasite-Specimen-35"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found next to the Gnarly Cauldron <b>(X: -2336 Y: -120)</b>.</td></tr>
 <tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Ring-of-Feywild-Sparks"></td><td><img src="imgs/Ring of Feywild Sparks.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Ring_of_Feywild_Sparks">Ring of Feywild Sparks</a></td><td>Looted from Auntie Ethel in the basement of The Blushing Mermaid.</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Fey-Semblance-Amulet"></td><td><img src="imgs/Fey Semblance Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Fey_Semblance_Amulet">Fey Semblance Amulet</a></td><td>Rewarded for completing "Avenge the Hag Survivors".</td></tr>
 <tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Amulet-of-Windrider"></td><td><img src="imgs/Amulet of Windrider.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_Windrider">Amulet of Windrider</a></td><td>Reward for completing the quest "Save Vanra".</td></tr>
-<tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Duellist's-Prerogative"></td><td><img src="imgs/Duellist's Prerogative.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Duellist's_Prerogative">Duellist's Prerogative</a></td><td>Reward for completing the quest "Save Vanra".</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Duellist's-Prerogative"></td><td><img src="imgs/Duellist's Prerogative.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Duellist's_Prerogative">Duellist's Prerogative</a></td><td>Reward for completing the quest "Save Vanra".</td></tr> <!-- TODO? -->
+<tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Abdel's-Trusted-Shield"></td><td><img src="imgs/Abdel's Trusted Shield.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Abdel's_Trusted_Shield">Abdel's Trusted Shield</a></td><td>Rewarded from Golbraith in the upper level of his home <b>(X: -148 Y: -60)</b> in the Lower City, after convincing him of your courage against Mind Flayers.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Katana"></td><td><img src="imgs/Katana.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Katana">Katana</a></td><td>Lying on a table in Golbraith's Cellar, which can be accessed through a hatch in Golbraith's House <b>(X: -152 Y: -55)</b> which is right next to a manhole in the Lower City that leads to the Lower City Sewers.</td></tr>
+<tr><td><input type="checkbox" class="Act3 The-Blushing-Mermaid" id="Mind-Flayer-Parasite-Specimen-25"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Dropped by Manip Edenosa around Bloomridge Park.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Ancient-Lair">Ancient Lair</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act3 Ancient-Lair" id="Breaching-Pikestaff"></td><td><img src="imgs/Breaching Pikestaff.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Breaching_Pikestaff">Breaching Pikestaff</a></td><td>Found on a coffin in the center of the tomb.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Szarr-Palace">Szarr Palace</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Szarr-Palace">Szarr Palace</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Szarr-Palace" id="Helmet-of-Grit"></td><td><img src="imgs/Helmet of Grit.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Helmet_of_Grit">Helmet of Grit</a></td><td>Looted from chest in cursed room of Szarr Palace <b>(X: -1298 Y: 965)</b>.</td></tr>
@@ -1229,7 +1255,70 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Szarr-Palace" id="Vampire-Ascendant"></td><td><img src="imgs/Vampire Ascendant.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vampire_Ascendant">Vampire Ascendant</a></td><td>Only available to Astarion after becoming an ascendant vampire.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Wyrm's-Rock-Fortress">Wyrm's Rock Fortress</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Jaheira's-Home">Jaheira's Home</h2>Also called Elerrathin's Home.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Jaheira's-Home" id="Belm"></td><td><img src="imgs/Belm.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Belm">Belm</a></td><td>Found in an Opulent Chest <b>(X: -1572 Y: 976)</b> in Jaheira's Basement under Elerrathin's Home in the Lower City. The chest is in a room behind a DC18 locked bookcase <b>(X: -1562 Y: 980)</b>. Also unlocked by a Harper Pin found on the roof.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Jaheira's-Home" id="Staff-of-the-Ram"></td><td><img src="imgs/Staff of the Ram.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Staff_of_the_Ram">Staff of the Ram</a></td><td>Found in an Opulent Chest <b>(X: -1572 Y: 976)</b> in Jaheira's Hideout Basement under Elerrathin's Home in the Lower City. The chest is in a room behind a DC18 locked bookcase <b>(X: -1562 Y: 980)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Jaheira's-Home" id="Khalid's-Gift"></td><td><img src="imgs/Khalid's Gift.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Khalid's_Gift">Khalid's Gift</a></td><td>In a display case in Jaheira's Basement.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Jaheira's-Home" id="Mind-Flayer-Parasite-Specimen-26"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Two are dropped by Fist 'Deadeye' Mibbs and Fist Healer Darbonna guarding the entrance to the Upper City near the Baldur's Gate Waypoint.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Lady-Jannath's-Estate">Lady Jannath's Estate</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Lady-Jannath's-Estate" id="Till-Death-Do-Us-Part"></td><td><img src="imgs/Till Death Do Us Part.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Till_Death_Do_Us_Part">Till Death Do Us Part</a></td><td>Pickpocket it off Lady Jannath in Lady Jannath's Estate.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Lady-Jannath's-Estate" id="After-Death-Do-Us-Part"></td><td><img src="imgs/After Death Do Us Part.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/After_Death_Do_Us_Part">After Death Do Us Part</a></td><td>Dropped by Oskar Fevras if his affair is exposed to Lady Jannath or if he is killed by Kerri during the quest "Free the Artist". Can also be dropped by Lady Jannath if Oskar wasn't saved in Act One.</td></tr>
+<!-- TODO player portrait -->
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="House-of-Grief">House of Grief</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Handmaiden's-Mace"></td><td><img src="imgs/Handmaiden's Mace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Handmaiden's_Mace">Handmaiden's Mace</a></td><td>Dropped by Viconia DeVir <b>(X: -400 Y: -1651)</b> in the Cloister of Sombre Embrace beneath the House of Grief.</td></tr>
+<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Viconia's-Priestess-Robe"></td><td><img src="imgs/Viconia's Priestess Robe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Viconia's_Priestess_Robe">Viconia's Priestess Robe</a></td><td>Worn by Viconia DeVir, Mother Superior of the Shar Enclave under the House of Grief.</td></tr>
+<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Mirror-of-Loss"></td><td><img src="imgs/Mirror of Loss.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mirror_of_Loss">Mirror of Loss</a></td><td>Offer a prayer (DC 25 Religion Check) to the Mirror of Loss in the House of Grief, then sacrifice one of the following: Constitution, Wisdom, Charisma, or your knowledge of the Necromancy of Thay. You'll receive the option to choose a +2 bonus to any ability (Can be raised above 20, up to 24).</td></tr>
+<tr><td><input type="checkbox" class="Act3 House-of-Grief" id="Viconia's-Walking-Fortress"></td><td><img src="imgs/Viconia's Walking Fortress.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Viconia's_Walking_Fortress">Viconia's Walking Fortress</a></td><td>Looted from Viconia DeVir during the quest "Daughter of Darkness".</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Society-of-Brilliance-Lodge">Society of Brilliance Lodge</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Society of Brilliance Lodge" id="Mind-Flayer-Parasite-Specimen-27"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a desk <b>(X: -208 Y: -86)</b> on the second floor of The Lodge.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Society of Brilliance Lodge" id="Unflinching-Protector-Amulet"></td><td><img src="imgs/Unflinching Protector Amulet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Unflinching_Protector_Amulet">Unflinching Protector Amulet</a></td><td>Looted from Ptaris in The Lodge Basement Docks under the Society of Brilliance Lodge.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Grey-Harbour-Docks">Grey Harbour Docks</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Grey-Harbour-Docks" id="Slayer-Knowledge"></td><td><img src="imgs/Slayer Knowledge.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Slayer_Knowledge">Slayer Knowledge</a></td><td>Granted after reading the book Regarding the Slayer given to you by Volo after saving him.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Grey-Harbour-Docks" id="Mind-Flayer-Parasite-Specimen-28"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Dropped by Churg Elvek around the Grey Harbour Docks.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Grey-Harbour-Docks" id="Mind-Flayer-Parasite-Specimen-32"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Six are found in Wooden Trunks on a ship just east of the Steel Watch Foundry.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Grey-Harbour-Docks" id="Wavemother's-Cloak"></td><td><img src="imgs/Wavemother's Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Wavemother's_Cloak">Wavemother's Cloak</a></td><td>Looted from a chest at <b>(X: -248 Y: -249)</b> in the Water Queen's House.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Grey-Harbour-Docks" id="Infernal-Iron-6"></td><td><img src="imgs/Infernal Iron.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Infernal_Iron">Infernal Iron</a></td><td>Found on the floor in Flymm Cargo's Basement <b>(X: -1078 Y: 312)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Grey-Harbour-Docks" id="Wavemother's-Robe"></td><td><img src="imgs/Wavemother's Robe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Wavemother's_Robe">Wavemother's Robe</a></td><td>Finish the quest "Avenge the Drowned" by handing over Redhammer.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Grey-Harbour-Docks" id="Wavemother's-Sickle"></td><td><img src="imgs/Wavemother's Sickle.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Wavemother's_Sickle">Wavemother's Sickle</a></td><td>Looted from Allandra Grey.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Steel-Watch-Foundry">Steel Watch Foundry</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Steelwatcher-Helmet"></td><td><img src="imgs/Steelwatcher Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Steelwatcher_Helmet">Steelwatcher Helmet</a></td><td>Can be found on a table on the ground floor.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Mind-Flayer-Parasite-Specimen-31"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a table <b>(X: -1937 Y: 447)</b> in the Steel Watch Foundry - Lab Level.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Hellfire-Engine-Crossbow"></td><td><img src="imgs/Hellfire Engine Crossbow.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hellfire_Engine_Crossbow">Hellfire Engine Crossbow</a></td><td>Crafted by combining three components found on the main floor of the Steel Watch Foundry at the table <b>(X: -325 Y: -134)</b> in the Security Office, the Watcher Crossbow Blueprint can be located on a table at coordinates <b>(X: -330 Y: -157)</b> within the Security Office. Additionally, the Targeting Module can be discovered on a table at <b>(X: -307 Y: -157)</b> on the main floor right next to the plaque labeled "Watcher Targeting Module." Lastly, the Steel Watcher Arm is situated on a table at <b>(X: -280 Y: -165)</b> on the main floor, adjacent to the plaque labeled "Steel Watcher Arm Unit."</td></tr>
+<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Winkling-Gloves"></td><td><img src="imgs/Winkling Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Winkling_Gloves">Winkling Gloves</a></td><td>Carried by Zanner Toobin in the western-most room on the ground floor or later accompanying the party in the basement during the quest "Save the Gondians".</td></tr>
+<tr><td><input type="checkbox" class="Act3 Steel-Watch-Foundry" id="Gontr-Mael"></td><td><img src="imgs/Gontr Mael.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gontr_Mael">Gontr Mael</a></td><td>Looted from the Steel Watcher Titan in Steel Watch Foundry.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Iron-Throne">Iron Throne</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Iron-Throne" id="Duke-Ravengard's-Longsword"></td><td><img src="imgs/Duke Ravengard's Longsword.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Duke_Ravengard's_Longsword">Duke Ravengard's Longsword</a></td><td>The sword can be obtained without requiring Duke Ulder Ravengard's death by having him use the Throw action when he becomes a temporary companion during the quest "The Grand Duke", making it available for looting.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Iron-Throne" id="Emblazoned-Plate-of-the-Marshal"></td><td><img src="imgs/Emblazoned Plate of the Marshal.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Emblazoned_Plate_of_the_Marshal">Emblazoned Plate of the Marshal</a></td><td>Can be looted from Duke Ulder Ravengard.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Iron-Throne" id="Mind-Flayer-Parasite-Specimen-33"></td><td><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></td><td>Found on a table <b>(X: -45 Y: 18)</b> inside a flooded room in the Iron Throne if Omeluum was not killed and Lady Esther was not given a githyanki egg in the quest "Steal a Githyanki Egg".</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Wyrm's-Rock-Fortress">Wyrm's Rock Fortress</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Wyrm's-Rock-Fortress" id="Tyrannical-Jackboots"></td><td><img src="imgs/Tyrannical Jackboots.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Tyrannical_Jackboots">Tyrannical Jackboots</a></td><td>Can be looted from Enver Gortash.</td></tr>
@@ -1245,20 +1334,58 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 Wyrm's-Rock-Fortress" id="Balduran's-Giantslayer"></td><td><img src="imgs/Balduran's Giantslayer.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Balduran's_Giantslayer">Balduran's Giantslayer</a></td><td>Rewarded for completing the Wyrmway trials at Dragon's Sanctum.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Devil's-Fee">Devil's Fee</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Murder-Tribunal">Murder Tribunal</h2></td></tr>
 
 
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Gemini-Gloves"></td><td><img src="imgs/Gemini Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gemini_Gloves">Gemini Gloves</a></td><td>720 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Cloak-of-the-Weave"></td><td><img src="imgs/Cloak of the Weave.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cloak_of_the_Weave">Cloak of the Weave</a></td><td>300 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Shapeshifter-Hat"></td><td><img src="imgs/Shapeshifter Hat.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shapeshifter_Hat">Shapeshifter Hat</a></td><td>70 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Spellseeking-Gloves"></td><td><img src="imgs/Spellseeking Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Spellseeking_Gloves">Spellseeking Gloves</a></td><td>160 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Gibus-of-the-Worshipful-Servant"></td><td><img src="imgs/Gibus of the Worshipful Servant.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Gibus_of_the_Worshipful_Servant">Gibus of the Worshipful Servant</a></td><td>35 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Hellbeard-Halberd"></td><td><img src="imgs/Hellbeard Halberd.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Hellbeard_Halberd">Hellbeard Halberd</a></td><td>380 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Caitiff-Staff"></td><td><img src="imgs/Caitiff Staff.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Caitiff_Staff">Caitiff Staff</a></td><td>190 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Devil's-Fee" id="Mask-of-Soul-Perception"></td><td><img src="imgs/Mask of Soul Perception.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mask_of_Soul_Perception">Mask of Soul Perception</a></td><td>1300 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Sword"></td><td><img src="imgs/Blackguard's Sword.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Sword">Blackguard's Sword</a></td><td>Looted from the undead guardian, That Which Guards.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Shield-of-the-Undevout"></td><td><img src="imgs/Shield of the Undevout.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shield_of_the_Undevout">Shield of the Undevout</a></td><td>Looted from the undead guardian, That Which Guards.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Plate"></td><td><img src="imgs/Blackguard's Plate.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Plate">Blackguard's Plate</a></td><td>Looted from the undead guardian, That Which Guards.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Gauntlets"></td><td><img src="imgs/Blackguard's Gauntlets.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Gauntlets">Blackguard's Gauntlets</a></td><td>Looted from the undead guardian, That Which Watches.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Greaves"></td><td><img src="imgs/Blackguard's Greaves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Greaves">Blackguard's Greaves</a></td><td>Looted from the undead guardian, That Which Lurks.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Amulet-of-Bhaal"></td><td><img src="imgs/Amulet of Bhaal.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_Bhaal">Amulet of Bhaal</a></td><td>Looted from Sarevok Anchev or reward by him for Impress the Murder Tribunal. <b>(X: -1248 Y: 503)</b></td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Sword-of-Chaos"></td><td><img src="imgs/Sword of Chaos.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sword_of_Chaos">Sword of Chaos</a></td><td>Looted from Sarevok.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Sarevok's-Horned-Helmet"></td><td><img src="imgs/Sarevok's Horned Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sarevok's_Horned_Helmet">Sarevok's Horned Helmet</a></td><td>Looted from Sarevok.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="House-of-Hope">House of Hope</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Echo-of-Abazigal">Echo of Abazigal</h2>After completing "Impress the Murder Tribunal" and becoming an Unholy Assassin of Bhaal, he will appear in the main chamber.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Bhaalist-Gloves"></td><td><img src="imgs/Bhaalist Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bhaalist_Gloves">Bhaalist Gloves</a></td><td>540 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Bhaalist-Armour"></td><td><img src="imgs/Bhaalist Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bhaalist_Armour">Bhaalist Armour</a></td><td>2000 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Assassin-of-Bhaal-Cowl"></td><td><img src="imgs/Assassin of Bhaal Cowl.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Assassin_of_Bhaal_Cowl">Assassin of Bhaal Cowl</a></td><td>450 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Craterflesh-Gloves"></td><td><img src="imgs/Craterflesh Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Craterflesh_Gloves">Craterflesh Gloves</a></td><td>290 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Vicious-Battleaxe"></td><td><img src="imgs/Vicious Battleaxe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vicious_Battleaxe">Vicious Battleaxe</a></td><td>310 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Dread-Iron-Dagger"></td><td><img src="imgs/Dread Iron Dagger.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Dread_Iron_Dagger">Dread Iron Dagger</a></td><td>190 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Fleshrender"></td><td><img src="imgs/Fleshrender.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Fleshrender">Fleshrender</a></td><td>190 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Vicious-Shortbow"></td><td><img src="imgs/Vicious Shortbow.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vicious_Shortbow">Vicious Shortbow</a></td><td>190 gp.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Lower-City-Sewers">Lower City Sewers</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Lower-City-Sewers" id="Murderous-Cut"></td><td><img src="imgs/Murderous Cut.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Murderous_Cut">Murderous Cut</a></td><td>Looted from several Bhaal cultists throughout Chapter 3.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Lower-City-Sewers" id="Cindermoth-Cloak"></td><td><img src="imgs/Cindermoth Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cindermoth_Cloak">Cindermoth Cloak</a></td><td>Can be looted from Aelis Siryasius at <b>(X: -123 Y: 834)</b>.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Lower-City-Sewers" id="Chancer's-Carcanet"></td><td><img src="imgs/Chancer's Carcanet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Chancer's_Carcanet">Chancer's Carcanet</a></td><td>Given by Sarin in the Lower City Sewers after you return their skull.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Lower-City-Sewers" id="Breaching-Pikestaff"></td><td><img src="imgs/Breaching Pikestaff.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Breaching_Pikestaff">Breaching Pikestaff</a></td><td>Found on a coffin in the center of the Ancient Lair west of the Undercity Ruins waypoint.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Voiceless-Penitent-Bareki">Voiceless Penitent Bareki</h2>He is next to the Undercity Ruins Ancient Rune Circle <b>(X: -157 Y: 939)</b>.</td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Voiceless-Penitent-Bareki" id="Bonespike-Helmet"></td><td><img src="imgs/Bonespike Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bonespike_Helmet">Bonespike Helmet</a></td><td>450 gp.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Voiceless-Penitent-Bareki" id="Armour-of-Moonbasking"></td><td><img src="imgs/Armour of Moonbasking.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_Moonbasking">Armour of Moonbasking</a></td><td>1400 gp.</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="Bhaal-Temple">Bhaal Temple</h2></td></tr>
+
+
+<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Bonespike-Gloves"></td><td><img src="imgs/Bonespike Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bonespike_Gloves">Bonespike Gloves</a></td><td>Looted from Strangler Luke in the Undercity Ruins during the quest "Get Orin's Netherstone" as part of the trial to enter the Temple of Bhaal. The enemy will despawn once the trial is complete so the item will need to be obtained before then.</td></tr>
+<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Mutilated-Carapace"></td><td><img src="imgs/Mutilated Carapace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mutilated_Carapace">Mutilated Carapace</a></td><td>Dropped by Orin during Get "Orin's Netherstone".</td></tr>
+<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Crimson-Mischief"></td><td><img src="imgs/Crimson Mischief.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Crimson_Mischief">Crimson Mischief</a></td><td>Dropped by Orin during Get "Orin's Netherstone".</td></tr>
+<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Bloodthirst"></td><td><img src="imgs/Bloodthirst.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bloodthirst">Bloodthirst</a></td><td>Dropped by Orin during Get "Orin's Netherstone".</td></tr>
+
+
+<tr><td colspan=4><h2 class="Act3 section" id="House-of-Hope">House of Hope</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 House-of-Hope" id="Helldusk-Helmet"></td><td><img src="imgs/Helldusk Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Helldusk_Helmet">Helldusk Helmet</a></td><td>Found in the House of Hope in a vault across from the entrance to the Boudoir. The player will need to pass a DC10 Wisdom check to activate the Inert Infernal Gem and then a DC20 Arcana check to use the Infernal Control Gem to open the door. The helmet will be located in the treasure pile <b>(X: -6482 Y: 2939)</b>.</td></tr>
@@ -1272,69 +1399,7 @@ window.onload = function() {
 <tr><td><input type="checkbox" class="Act3 House-of-Hope" id="Helldusk-Armour"></td><td><img src="imgs/Helldusk Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Helldusk_Armour">Helldusk Armour</a></td><td>Looted from Raphael in Chapter Three in the House of Hope.</td></tr>
 
 
-<tr><td colspan=4><h2 class="section" id="Murder-Tribunal">Murder Tribunal</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Sword"></td><td><img src="imgs/Blackguard's Sword.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Sword">Blackguard's Sword</a></td><td>Looted from the undead guardian, That Which Guards.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Shield-of-the-Undevout"></td><td><img src="imgs/Shield of the Undevout.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shield_of_the_Undevout">Shield of the Undevout</a></td><td>Looted from the undead guardian, That Which Guards.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Plate"></td><td><img src="imgs/Blackguard's Plate.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Plate">Blackguard's Plate</a></td><td>Looted from the undead guardian, That Which Guards.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Gauntlets"></td><td><img src="imgs/Blackguard's Gauntlets.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Gauntlets">Blackguard's Gauntlets</a></td><td>Looted from the undead guardian, That Which Watches.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Blackguard's-Greaves"></td><td><img src="imgs/Blackguard's Greaves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Blackguard's_Greaves">Blackguard's Greaves</a></td><td>Looted from the undead guardian, That Which Lurks.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Amulet-of-Bhaal"></td><td><img src="imgs/Amulet of Bhaal.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Amulet_of_Bhaal">Amulet of Bhaal</a></td><td>Looted from Sarevok Anchev or reward by him for Impress the Murder Tribunal. <b>(X: -1248 Y: 503)</b></td></tr>
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Sword-of-Chaos"></td><td><img src="imgs/Sword of Chaos.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sword_of_Chaos">Sword of Chaos</a></td><td>Looted from Sarevok.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Murder-Tribunal" id="Sarevok's-Horned-Helmet"></td><td><img src="imgs/Sarevok's Horned Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Sarevok's_Horned_Helmet">Sarevok's Horned Helmet</a></td><td>Looted from Sarevok.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Echo-of-Abazigal">Echo of Abazigal</h2>After completing "Impress the Murder Tribunal" and becoming an Unholy Assassin of Bhaal, he will appear in the main chamber.
-
-
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Bhaalist-Gloves"></td><td><img src="imgs/Bhaalist Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bhaalist_Gloves">Bhaalist Gloves</a></td><td>540 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Bhaalist-Armour"></td><td><img src="imgs/Bhaalist Armour.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bhaalist_Armour">Bhaalist Armour</a></td><td>2000 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Assassin-of-Bhaal-Cowl"></td><td><img src="imgs/Assassin of Bhaal Cowl.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Assassin_of_Bhaal_Cowl">Assassin of Bhaal Cowl</a></td><td>450 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Craterflesh-Gloves"></td><td><img src="imgs/Craterflesh Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Craterflesh_Gloves">Craterflesh Gloves</a></td><td>290 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Vicious-Battleaxe"></td><td><img src="imgs/Vicious Battleaxe.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vicious_Battleaxe">Vicious Battleaxe</a></td><td>310 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Dread-Iron-Dagger"></td><td><img src="imgs/Dread Iron Dagger.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Dread_Iron_Dagger">Dread Iron Dagger</a></td><td>190 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Fleshrender"></td><td><img src="imgs/Fleshrender.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Fleshrender">Fleshrender</a></td><td>190 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Echo-of-Abazigal" id="Vicious-Shortbow"></td><td><img src="imgs/Vicious Shortbow.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Vicious_Shortbow">Vicious Shortbow</a></td><td>190 gp.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Lower-City-Sewers">Lower City Sewers</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act3 Lower-City-Sewers" id="Murderous-Cut"></td><td><img src="imgs/Murderous Cut.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Murderous_Cut">Murderous Cut</a></td><td>Looted from several Bhaal cultists throughout Chapter 3.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City-Sewers" id="Cindermoth-Cloak"></td><td><img src="imgs/Cindermoth Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Cindermoth_Cloak">Cindermoth Cloak</a></td><td>Can be looted from Aelis Siryasius at <b>(X: -123 Y: 834)</b>.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Lower-City-Sewers" id="Chancer's-Carcanet"></td><td><img src="imgs/Chancer's Carcanet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Chancer's_Carcanet">Chancer's Carcanet</a></td><td>Given by Sarin in the Lower City Sewers after you return their skull.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Bar-Tender-Severn">Bar Tender Severn</h2>He is at Guildhall in the Lower City Sewers.
-
-
-<tr><td><input type="checkbox" class="Act3 Bar-Tender-Severn" id="Drunken-Cloth"></td><td><img src="imgs/Drunken Cloth.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Drunken_Cloth">Drunken Cloth</a></td><td>800 gp.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Sticky-Dondo">Sticky Dondo</h2>He is at Guildhall in the Lower City Sewers <b>(X: -17 Y: 755)</b>.
-
-
-<tr><td><input type="checkbox" class="Act3 Sticky-Dondo" id="Shade-Slayer-Cloak"></td><td><img src="imgs/Shade-Slayer Cloak.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Shade-Slayer_Cloak">Shade-Slayer Cloak</a></td><td>360 gp.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Voiceless-Penitent-Bareki">Voiceless Penitent Bareki</h2>He is next to the Undercity Ruins Ancient Rune Circle <b>(X: -157 Y: 939)</b>.
-
-
-<tr><td><input type="checkbox" class="Act3 Voiceless-Penitent-Bareki" id="Bonespike-Helmet"></td><td><img src="imgs/Bonespike Helmet.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bonespike_Helmet">Bonespike Helmet</a></td><td>450 gp.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Voiceless-Penitent-Bareki" id="Armour-of-Moonbasking"></td><td><img src="imgs/Armour of Moonbasking.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Armour_of_Moonbasking">Armour of Moonbasking</a></td><td>1400 gp.</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Bhaal-Temple">Bhaal Temple</h2></td></tr>
-
-
-<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Bonespike-Gloves"></td><td><img src="imgs/Bonespike Gloves.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bonespike_Gloves">Bonespike Gloves</a></td><td>Looted from Strangler Luke in the Undercity Ruins during the quest "Get Orin's Netherstone" as part of the trial to enter the Temple of Bhaal. The enemy will despawn once the trial is complete so the item will need to be obtained before then.</td></tr>
-<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Mutilated-Carapace"></td><td><img src="imgs/Mutilated Carapace.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Mutilated_Carapace">Mutilated Carapace</a></td><td>Dropped by Orin during Get "Orin's Netherstone".</td></tr>
-<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Crimson-Mischief"></td><td><img src="imgs/Crimson Mischief.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Crimson_Mischief">Crimson Mischief</a></td><td>Dropped by Orin during Get "Orin's Netherstone".</td></tr>
-<tr><td><input type="checkbox" class="Act3 Bhaal-Temple" id="Bloodthirst"></td><td><img src="imgs/Bloodthirst.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Bloodthirst">Bloodthirst</a></td><td>Dropped by Orin during Get "Orin's Netherstone".</td></tr>
-
-
-<tr><td colspan=4><h2 class="section" id="Confront-the-Elder-Brain">Confront the Elder Brain</h2></td></tr>
+<tr><td colspan=4><h2 class="Act3 section" id="Confront-the-Elder-Brain">Confront the Elder Brain</h2></td></tr>
 
 
 <tr><td><input type="checkbox" class="Act3 Confront-the-Elder-Brain" id="Orphic-Ring"></td><td><img src="imgs/Orphic Ring.png" width=50 height=50></td><td><a href="https://bg3.wiki/wiki/Orphic_Ring">Orphic Ring</a></td><td>Looted from Prince Orpheus.</td></tr>
