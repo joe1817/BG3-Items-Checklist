@@ -10,11 +10,11 @@ Checklist for getting all unique gear in Baldur's Gate 3. Up-to-date as of Patch
 
 ## Not Included
 - common, +1, and +2 gear
-- gear equivalent to above (e.g., Staff of the Moonmaiden, Magical Pike, most story gear)
+- gear equivalent to above (e.g., Staff of the Moonmaiden, Magical Pike, most quest gear)
 - inaccessible gear
-- items with no beneficial effect (e.g., Kill Collar)
-- DLC items (e.g., Mask of the Shapeshifter)
-- Trepan, Syringe, Bonesaw, Artificial Leech (weapon actions are not available to player)
+- gear with no beneficial effect (e.g., Kill Collar)
+- DLC gear (e.g., Mask of the Shapeshifter)
 
 ## TODO
-- add unique consumables (grenades, potions, and runepowder)
+- Add unique consumables (grenades, potions, and runepowder).
+- Add Trepan, Syringe, Bonesaw, and Artificial Leech? Their weapon actions are not actually availiable to the player when the weapons are equipped.
